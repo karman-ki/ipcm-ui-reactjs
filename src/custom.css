@@ -1,0 +1,58 @@
+
+.sidebar-container {
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: rgb(37, 51, 66);
+    --navbar-hover-color: rgb(224, 88, 111);
+    height: 1000px;
+}
+
+.brand {
+    display: inline-block;
+    font-size: 0.5rem;
+    padding: 20px;
+}
+
+.main-header {
+    color: white;
+}
+
+.logo {
+    width: 50px;
+}
+
+.navbar-items {
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link.active {
+    color: var(--navbar-hover-color);
+}
+
+.nav-link:hover {
+    color: var(--navbar-hover-color);
+}
+
+.nav-link-active {
+    color: var(--navbar-hover-color);
+    text-decoration: none;
+}
+
+.navbar-tabs {
+    font-family: 'Courier New', Courier, monospace;
+}
+
