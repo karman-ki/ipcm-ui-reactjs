@@ -1,0 +1,51 @@
+[
+    {
+        "study_id": 32185,
+        "birth_date": "1944-12-11",
+        "hospital_name": "Karolinska",
+        "cancer_type": "Bowel",
+        "created_by": "Charlotta Hallin",
+        "created_on": "2022-10-11"
+
+    },
+    {
+        "study_id": 15479,
+        "birth_date": "1944-12-11",
+        "hospital_name": "St Göran",
+        "cancer_type": "Other",
+        "created_by": "Kalle Ekdahl",
+        "created_on": "2022-10-11"
+    },
+    {
+        "study_id": 25205,
+        "birth_date": "1965-08-22",
+        "hospital_name": "Södersjukhuset",
+        "cancer_type": "Other",
+        "created_by": "Kalle Ekdahl",
+        "created_on": "2022-10-10"
+    },
+    {
+        "study_id": 20123,
+        "birth_date": "1945-12-11",
+        "hospital_name": "Karolinska",
+        "cancer_type": "Other",
+        "created_by": "Ida Sörling Mannervik",
+        "created_on": "2022-10-06"
+    },
+    {
+        "study_id": 15461,
+        "birth_date": "1959-01-12",
+        "hospital_name": "Karolinska",
+        "cancer_type": "Bowel",
+        "created_by": "Ida Sörling Mannervik",
+        "created_on": "2022-10-11"
+    },
+    {
+        "study_id": 15453,
+        "birth_date": "1984-11-11",
+        "hospital_name": "Södersjukhuset",
+        "cancer_type": "Esophagus/Stomach",
+        "created_by": "Kalle Ekdahl",
+        "created_on": "2022-10-07"
+    }
+]

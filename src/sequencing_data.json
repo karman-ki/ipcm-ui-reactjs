@@ -1,0 +1,62 @@
+[
+    {
+        "sequence_name": "iPCM-P-00456136-N-04044317-KH20221004-PN20221005",
+        "cfdna": "04044317",
+        "rid": "371457",
+        "study_id": "15396",
+        "site_name": "St Göran",
+        "created_on": "2022-10-09",
+        "status": "Data-delivered"
+
+    },
+    {
+        "sequence_name": "iPCM-P-00456479-N-04088988-KH20221004-PN20221005",
+        "cfdna": "04044333",
+        "rid": "389571",
+        "study_id": "15238",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-09",
+        "status": "Data-delivered"
+
+    },
+    {
+        "sequence_name": "iPCM-P-00456497-N-04044321-KH20221004-PN20221005",
+        "cfdna": "04044473",
+        "rid": "389571",
+        "study_id": "15412",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-08",
+        "status": "Data-delivered"
+
+    },
+    {
+        "sequence_name": "iPCM-P-00457309-N-04106587-KH20221004-PN20221005",
+        "cfdna": "04088996",
+        "rid": "00371502",
+        "study_id": "371495",
+        "site_name": "Södersjukhuset",
+        "created_on": "2022-10-08",
+        "status": "Data-delivered"
+
+    },
+    {
+        "sequence_name": "iPCM-P-00456204-N-04088984-KH20221004-PN20221005",
+        "cfdna": "04106587",
+        "rid": "00371502",
+        "study_id": "386084",
+        "site_name": "Södersjukhuset",
+        "created_on": "2022-10-06",
+        "status": "Data-delivered"
+
+    },
+    {
+        "sequence_name": "iPCM-P-00457309-CFDNA-04106586-KH20221004-PN20221005",
+        "cfdna": "04088988",
+        "rid": "00371502",
+        "study_id": "389571",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "status": "Data-delivered"
+
+    }
+]

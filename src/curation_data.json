@@ -1,0 +1,50 @@
+[
+    {
+        "sample_id": "P-00453843",
+        "capture_id": "iPCM-P-00456479-T-04098690-KH20221004-PN20221005_iPCM-P-00456479-N-04088988-KH20221004-PN20221005",
+        "rid": "386082",
+        "study_id": "32136",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-11"
+    },
+    {
+        "sample_id": "P-00456479",
+        "capture_id": "iPCM-P-00456479-T-04098690-KH20221004-PN20221005_iPCM-P-00456479-N-04088988-KH20221004-PN20221005",
+        "rid": "386082",
+        "study_id": "32136",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-11"
+    },
+    {
+        "sample_id": "P-00454246",
+        "capture_id": "iPCM-P-00456479-T-04098690-KH20221004-PN20221005_iPCM-P-00456479-N-04088988-KH20221004-PN20221005",
+        "rid": "386082",
+        "study_id": "32136",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-09"
+    },
+    {
+        "sample_id": "P-00453843",
+        "capture_id": "iPCM-P-00456479-T-04098690-KH20221004-PN20221005_iPCM-P-00456479-N-04088988-KH20221004-PN20221005",
+        "rid": "386082",
+        "study_id": "32136",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-09"
+    },
+    {
+        "sample_id": "P-00456479",
+        "capture_id": "iPCM-P-00456479-T-04098690-KH20221004-PN20221005_iPCM-P-00456479-N-04088988-KH20221004-PN20221005",
+        "rid": "386082",
+        "study_id": "32136",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-10"
+    },
+    {
+        "sample_id": "P-00454246",
+        "capture_id": "iPCM-P-00456479-T-04098690-KH20221004-PN20221005_iPCM-P-00456479-N-04088988-KH20221004-PN20221005",
+        "rid": "386082",
+        "study_id": "32136",
+        "site_name": "Karolinska",
+        "created_on": "2022-10-10"
+    }
+]

@@ -23,117 +23,50 @@ import { GoDashboard } from "react-icons/go";
 import { CgList } from "react-icons/cg";
 import { BiTestTube } from "react-icons/bi";
 import { TbDna2 } from "react-icons/tb";
-
-
-
-
-
-
-
+import { BsFillPersonCheckFill } from "react-icons/bs";
 
 import './index.css';
 
 
-function showDropdown(id) {
-  var dropdown = document.getElementsByClassName("dropdown")[id];
-  var dropContent = document.getElementsByClassName("dropdown-content")[id];
-  var icon = document.getElementsByClassName("dropdown-icon")[id];
-
-
-  if (dropContent.style.display != "block") {
-    dropContent.style.display = "block";
-    icon.classList.add("dropdown-icon-rotated");
-    dropdown.style.color = "var(--accent-color)";
-
-  } else {
-    dropContent.style.display = "none";
-    icon.classList.remove("dropdown-icon-rotated");
-    dropdown.style.color = "var(--navbar-text-color)";
-  }
-}
-
-function hideDropdowns() {
-  var dropdowns = document.getElementsByClassName("dropdown");
-  var dropContents = document.getElementsByClassName("dropdown-content");
-  var icons = document.getElementsByClassName("dropdown-icon");
-  var i;
-
-  for (i = 0; i < dropContents.length; i++) {
-    dropContents[i].style.display = "none";
-    icons[i].classList.remove("dropdown-icon-rotated");
-    dropdowns[i].style.color = "var(--navbar-text-color)";
-  }
-
-}
-
-
 export function Sidebar() {
 
-  
-  /*
-  const [dimensions, setDimensions] = React.useState({
-    height: window.innerHeight,
-    width: window.innerWidth
-  })
-  React.useEffect(() => {
-    function handleResize() {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth
-      })
-
-      var nav = document.getElementById("nav");
-
-      if(dimensions.width<768) {
-        if()
-        nav.classList.add("navbar-top");
-      } else {}
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return _ => {
-      window.removeEventListener('resize', handleResize)
-    }
-  })*/
-
-
+ 
   return (
     <div className='navbar' id="nav">
       <div id="nav-content">
         
         <div className="nav-items" >
 
-          <NavLink exact="true" className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/" onClick={hideDropdowns}>
-            <GoDashboard />
-            <span>Dashboard</span>
+          <NavLink exact="true" className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/" >
+            <GoDashboard className="nav-img"/>
+            <span className="navlink-text">Dashboard</span>
           </NavLink>
-          <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/create" onClick={hideDropdowns}>
-            <AiOutlinePlusCircle />
-            <span>Create eCRF</span>
+          <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/create" >
+            <AiOutlinePlusCircle className="nav-img"/>
+            <span className="navlink-text">Create eCRF</span>
           </NavLink>
 
           <hr className="nav-divider"></hr>
 
           <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/inclusion">
-            <AiOutlineSync />
-            <span>Inclusion</span>
+            <BsFillPersonCheckFill className="nav-img"/>
+            <span className="navlink-text">Inclusion</span>
           </NavLink>
-          <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/list" onClick={hideDropdowns}>
-            <CgList />
-            <span>eCRF List</span>
+          <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/list" >
+            <CgList className="nav-img"/>
+            <span className="navlink-text">eCRF List</span>
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/referral" >
-            <BiTestTube />
-            <span>Referral DB</span>
+            <BiTestTube className="nav-img"/>
+            <span className="navlink-text">Referral DB</span>
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/sequencing" >
-            <TbDna2 />
-            <span>Sequencing</span>
+            <TbDna2 className="nav-img"/>
+            <span className="navlink-text">Sequencing</span>
           </NavLink>
-          <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/curation" onClick={hideDropdowns}>
-            <RiRocket2Line />
-            <span>Curation</span>
+          <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/curation" >
+            <RiRocket2Line className="nav-img"/>
+            <span className="navlink-text">Curation</span>
           </NavLink>
 
           

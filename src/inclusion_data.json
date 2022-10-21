@@ -1,0 +1,80 @@
+[
+    {
+        "study_id": 20105,
+        "site_name": "Södersjukhuset",
+        "created_on": "2022-10-05",
+        "processing_status": "report"
+    },
+    {
+        "study_id": 15461,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-02",
+        "processing_status": "sequencing"
+    },
+    {
+        "study_id": 15453,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "processing_status": "data delivered"
+    },
+    {
+        "study_id": 20124,
+        "site_name": "Södersjukhuset",
+        "created_on": "2022-10-03",
+        "processing_status": "inclusion"
+    },
+    {
+        "study_id": 15448,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "processing_status": "biobank"
+    },
+    {
+        "study_id": 15457,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "processing_status": "data delivered"
+    },
+    {
+        "study_id": 15465,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "processing_status": "biobank"
+    },
+    {
+        "study_id": 15423,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "processing_status": "biobank"
+    },
+    {
+        "study_id": 15462,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "processing_status": "biobank"
+    },
+    {
+        "study_id": 15467,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "processing_status": "biobank"
+    },
+    {
+        "study_id": 15454,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-04",
+        "processing_status": "biobank"
+    },
+    {
+        "study_id": 15435,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-06",
+        "processing_status": "biobank"
+    },
+    {
+        "study_id": 15425,
+        "site_name": "Karolinska",
+        "created_on": "2022-10-07",
+        "processing_status": "biobank"
+    }
+]
