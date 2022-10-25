@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { FaSortUp } from "react-icons/fa";
+import { FaSortDown } from "react-icons/fa";
+import { FaSort } from "react-icons/fa";
+
 
 
 const TableHead = ({ columns, order, sortField, handleSort }) => {
@@ -13,20 +17,24 @@ const TableHead = ({ columns, order, sortField, handleSort }) => {
         <thead>
             <tr>
                 {columns.map(({ label, accessor, sortable }) => {
-                    const cl = sortable
+                    const icon = sortable
                         ? sortField === accessor && order === "asc"
-                            ? "up"
+                            ? <FaSortUp className="sort-icon active" />
                             : sortField === accessor && order === "desc"
-                                ? "down"
-                                : "default"
+                                ? <FaSortDown className="sort-icon active" />
+                                : <FaSort className="sort-icon" />
                         : "";
+                    const cl = sortable ? "th-clickable" : "";
                     return (
                         <th
+                            className={cl}
                             key={accessor}
                             onClick={sortable ? () => handleSortingChange(accessor) : null}
-                            className={cl}
                         >
-                            {label}
+                            <div className="th-sort">
+                                {label}
+                                {icon}
+                            </div>
                         </th>
                     );
                 })}
