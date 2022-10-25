@@ -43,7 +43,8 @@
     "react-transition-group": "^4.4.2",
     "react-widgets": "^5.8.4",
     "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
