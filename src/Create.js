@@ -1,8 +1,6 @@
 import * as React from 'react';
-import Select from 'react-select'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Switch from "@mui/material/Switch";
 import cancerList from "./cancer_type_list.json";
 import { Form, Formik, Field } from "formik";
 import { useField } from "formik";
@@ -232,14 +230,12 @@ export default function Create() {
                                     </div>
                                 </Col>
                             </Row>
-                            <div className='input-container-inline'>
                                 <button
                                     disabled={isSubmitting}
                                     type="submit"
-                                    className='input input-border button'>
+                                    className='input-border button'>
                                     Submit
                                 </button>
-                            </div>
                         </Form>
                     </div>
                 </section>
@@ -249,14 +245,6 @@ export default function Create() {
 };
 
 
-/*
-import * as React from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Switch from "@mui/material/Switch";
-import cancerList from "./cancer_type_list.json";
-import { useFormik } from "formik";
-import * as yup from "yup";
 
 
 
@@ -264,128 +252,3 @@ import * as yup from "yup";
 
 
 
-function Create() {
-
-    const {
-        values,
-        errors,
-        touched,
-        isSubmitting,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-    } = useFormik({
-        initialValues: {
-            studyId: "",
-            birthDate: "",
-            hospital: "",
-        },
-        validationSchema: basicSchema,
-        onSubmit,
-    });
-
-    console.log(errors);
-
-
-    return (
-        <>
-            <section>
-                <div className='sync-section section-step' id='sync-section'>
-                    <h3>Create eCRF</h3>
-                    <form onSubmit={handleSubmit} autoComplete="off">
-                        <Row>
-                            <Col lg={{ span: 5, offset: 0 }}>
-                                <div className='input-container'>
-                                    <p>Study ID</p>
-                                    <input
-                                        value={values.studyId}
-                                        onChange={handleChange}
-                                        id="studyId"
-                                        className={`input input-border text-field ${errors.studyId && touched.studyId ? "input-error" : ""}`}
-                                        type="text"
-                                        placeholder='Study ID'
-                                        onBlur={handleBlur}
-                                    />
-                                </div>
-
-                                <div className='input-container'>
-                                    <p>Date of birth</p>
-                                    <input
-                                        value={values.birthDate}
-                                        onChange={handleChange}
-                                        id="birthDate"
-                                        className={`input input-border text-field ${errors.birthDate && touched.birthDate ? "input-error" : ""}`}
-                                        type="date"
-                                        onBlur={handleBlur}
-                                    />
-                                </div>
-
-
-                                <div className='input-container'>
-                                    <p>Hospital</p>
-                                    <Select
-                                        //value={values.hospital}
-                                        //onChange={handleChange}
-                                        id="hospital"
-                                        type="text"
-                                        className={'input input-border text-field'}
-                                        options={hospitals}
-                                        onBlur={handleBlur}
-                                    />
-
-                                </div>
-
-                                <div className='input-container'>
-                                    <p>Cancer cell fraction</p>
-                                    <input className='input input-border text-field' type="text" placeholder='Cancer cell fraction' />
-                                </div>
-
-                            </Col>
-                            <Col lg={{ span: 5 }}>
-                                <div className='input-container'>
-                                    <p>Cancer type</p>
-                                    <Select className='input select' options={cancerTypes} />
-                                </div>
-
-                                <div className='input-container'>
-                                    <p>Cancer sub type</p>
-                                    <input className='input input-border text-field' type="text" placeholder='Cancer sub type' />
-                                </div>
-                                <div className='input-container'>
-                                    <p>Cancer tissue type</p>
-                                    <div className="checkbox">
-                                        <input type="checkbox" /><p>FFPE</p>
-                                    </div>
-                                    <div className="checkbox">
-                                        <input type="checkbox" /><p>Cytology</p>
-                                    </div>
-                                    <div className="checkbox">
-                                        <input type="checkbox" /><p>cfDNA</p>
-                                    </div>
-                                </div>
-                                <div className='input-container'>
-                                    <p>Germline DNA</p>
-                                    <Switch defaultChecked />
-                                </div>
-                                <div className='input-container'>
-                                    <p>Blood collected before treatment start</p>
-                                    <Switch defaultChecked />
-                                </div>
-
-                            </Col>
-                        </Row>
-                        <div className='input-container-inline'>
-                            <button type="submit" className='input input-border button'>Submit</button>
-                        </div>
-                    </form>
-
-
-                </div>
-            </section>
-        </>
-    );
-}
-
-export default Create;
-
-*/

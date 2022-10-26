@@ -1,10 +1,20 @@
-import { useState } from "react";
 import TableBody from "./TableBody";
 import TableHead from "./TableHead";
 import TableHeadSearch from "./TableHeadSearch";
 
+export function InitSort(columns) {
+    var initSortField;
+    var initSortOrder;
+    columns.forEach((col) => {
+        if (col.sortbyOrder) {
+            initSortField = col.accessor;
+            initSortOrder = col.sortbyOrder;
+        }
+    });
+    return [initSortField, initSortOrder];
+}
 
-const Table = ({tableData, columns, order, sortField, handleSort, handleSearch }) => {
+const Table = ({ tableData, columns, order, sortField, handleSort, handleSearch }) => {
     return (
         <>
             <table className="table">

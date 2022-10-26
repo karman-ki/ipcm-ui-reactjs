@@ -1,5 +1,6 @@
 import React, { useState, Component } from 'react'
 import Table from "./Table.js";
+import {InitSort} from "./Table.js";
 import tableData from "./inclusion_data.json";
 import { SortData } from "./UpdateData";
 
@@ -14,15 +15,7 @@ const columns = [
 
 export default function Dashboard() {
 
-  var initSortField;
-  var initSortOrder;
-
-  columns.forEach((col) => {
-    if (col.sortbyOrder) {
-      initSortField = col.accessor;
-      initSortOrder = col.sortbyOrder;
-    }
-  });
+  var [initSortField, initSortOrder] = InitSort(columns);
 
   // Current sorting and search state
   const [sortField, setSortField] = useState(initSortField);
