@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FaSortUp } from "react-icons/fa";
 import { FaSortDown } from "react-icons/fa";
 import { FaSort } from "react-icons/fa";

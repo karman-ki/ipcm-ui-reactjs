@@ -1,6 +1,5 @@
 import React, { useState, Component } from 'react'
-import Table from "./Table.js";
-import {InitSort} from "./Table.js";
+import { Table, InitSort, PrepareData } from "./Table.js";
 import tableData from "./inclusion_data.json";
 import { SortData } from "./UpdateData";
 
@@ -21,13 +20,10 @@ export default function Dashboard() {
   const [sortField, setSortField] = useState(initSortField);
   const [sortOrder, setSortOrder] = useState(initSortOrder);
 
-
   var data = SortData(tableData, sortField, sortOrder);
 
   return (
     <div>
-      {/* Content Header (Page header) */}
-
       <section className="content">
         <div className="container-fluid">
           <div className="row">
@@ -111,12 +107,9 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-
           </div>
 
-
           <div className="row">
-
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-header border-0">
@@ -185,7 +178,6 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
-      {/* /.content */}
     </div >
   )
 }
