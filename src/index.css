@@ -206,8 +206,8 @@ h5 {
 }
 
 #header-logged-in {
-  display: none;
-  align-items: center;
+  display: flex;
+  align-items: baseline;
 }
 
 .profile-link {

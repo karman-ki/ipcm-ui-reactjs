@@ -62,12 +62,6 @@ function Header() {
                         <GiHamburgerMenu onClick={ToggleSidebar} />
                     </div>
                 </div>
-                <div id="header-login">
-                    <div onClick={Login} className="profile-link">
-                        <FiLogIn></FiLogIn>
-                        <span>Login</span>
-                    </div>
-                </div>
                 <div id="header-logged-in">
                     Logged in as
                     <NavLink to="/profile" className={({ isActive }) => (isActive ? "profile-link active" : 'profile-link')}>
