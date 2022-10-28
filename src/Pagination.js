@@ -1,10 +1,3 @@
-import Timeline from "./Timeline.js";
-import Inclusion from "./Inclusion.js";
-import { IoMdInformationCircleOutline } from "react-icons/io";
-import { BiEdit } from "react-icons/bi";
-import { BsFillCheckCircleFill } from "react-icons/bs";
-
-
 
 const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
 

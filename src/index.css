@@ -91,34 +91,9 @@ h5 {
 }
 
 
-td {
-  font-size: 0.8rem;
-}
 
 
-.non-click-rows tr {
-  cursor: auto;
-}
 
-.striped-rows tr:nth-child(odd) {
-  background-color: rgb(223, 244, 249);
-}
-
-.striped-rows th {
-  background-color: var(--section-background-color);
-}
-
-.success-message {
-  fill: rgb(86, 168, 86);
-  color: rgb(86, 168, 86);
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-}
-
-.success-message .icon {
-  font-size: 1.8rem;
-  margin-right: 5px;
-}
 
 /*** Page ***/
 
@@ -148,6 +123,30 @@ td {
   vertical-align: top;
   transition: 0.5s;
 }
+
+/** Login **/
+
+.login-container {
+  background-color: white;
+  padding: 30px;
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.login-form {
+  width: 50%;
+  margin: auto;
+}
+
+.login-button {
+  height: 50px;
+}
+
+.login-logo {
+  width: 50%;
+}
+
 
 /*** Header ***/
 
@@ -425,7 +424,7 @@ select.input-error {
 select {
   font-weight: 400;
   font-size: 0.9rem;
-  background: url(./arrow-down-bold-svgrepo-com.svg) no-repeat center;
+  background: url(./arrow-down-bold-svgrepo-com.svg) no-repeat center white;
   background-size: 0.9rem;
   -webkit-appearance: none;
   background-position-x: 95%;
@@ -549,10 +548,12 @@ input:checked+.slider:before {
 
 .info-button {
   background-color: rgb(231, 231, 231);
+  border-color: rgb(220, 220, 220);
 }
 
 .info-button:hover {
   background-color: rgb(241, 241, 241);
+  border-color: rgb(232, 232, 232);
 }
 
 .edit-button {
@@ -655,12 +656,33 @@ Table
   /* max-height: 500px; */
   margin: 0 auto;
   overflow: auto;
+  border: solid #e1e1e1 1px;
+  border-radius: 0.25rem 0.25rem 0 0;
+  border-bottom: none;
+  margin-bottom: 20px;
 }
 
 .table {
   width: 100%;
   border-spacing: 0;
   border: solid #dee2e6 1px;
+}
+
+td {
+  font-size: 0.8rem;
+}
+
+
+.non-click-rows tr {
+  cursor: auto;
+}
+
+.striped-rows tr:nth-child(odd) {
+  background-color: rgb(223, 244, 249);
+}
+
+.striped-rows th {
+  background-color: var(--section-background-color);
 }
 
 caption {

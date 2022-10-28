@@ -12,18 +12,16 @@ import Referral from "./Referral"
 import Sequencing from "./Sequencing"
 import Profile from "./Profile"
 
-
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-
-
 import reportWebVitals from './reportWebVitals';
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 Amplify.configure(awsExports);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

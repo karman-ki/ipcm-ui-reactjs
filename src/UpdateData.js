@@ -25,7 +25,6 @@ export function SearchData(data, searchField, searchQuery, columns) {
                     let txtValue = "" + data[i][col['accessor']];
                     if (txtValue.toLowerCase().indexOf(searchQuery) > -1) {
                         result.push(data[i]);
-                        console.log(data[i][col['accessor']])
                         return false;
                     }
                     return true;

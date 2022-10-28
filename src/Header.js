@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React, { useState } from 'react'
 import BrandLogo from './logo.png'
-
-import { GrFormCheckmark } from "react-icons/gr";
 import { BsPersonSquare } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiLogIn } from "react-icons/fi";

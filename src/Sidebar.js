@@ -1,35 +1,16 @@
 import { NavLink } from "react-router-dom";
-import { VscHome } from "react-icons/vsc";
-import { AiOutlineSync } from "react-icons/ai";
 import { RiRocket2Line } from "react-icons/ri";
-import { VscGraphLine } from "react-icons/vsc";
-import { RiTestTubeLine } from "react-icons/ri";
-import { VscFile } from "react-icons/vsc";
-import { MdOutlineTableChart } from "react-icons/md";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { MdOutlineArrowDropDown } from "react-icons/md";
-import { GoBook } from "react-icons/go";
-import { BsCardChecklist } from "react-icons/bs";
-import { BsFileEarmarkPlus } from "react-icons/bs";
-import { ImFilesEmpty } from "react-icons/im";
-import { MdOutlineEventNote } from "react-icons/md";
-import { ImHourGlass } from "react-icons/im";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Hamburger from 'hamburger-react'
-import React, { useState } from 'react'
+import React from 'react'
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { GoDashboard } from "react-icons/go";
 import { CgList } from "react-icons/cg";
 import { BiTestTube } from "react-icons/bi";
 import { TbDna2 } from "react-icons/tb";
 import { BsFillPersonCheckFill } from "react-icons/bs";
-
 import './index.css';
 
 
 export function Sidebar() {
-
  
   return (
     <div className='navbar' id="nav">
@@ -69,7 +50,6 @@ export function Sidebar() {
             <span className="navlink-text">Curation</span>
           </NavLink>
 
-          
         </div>
       </div>
 
