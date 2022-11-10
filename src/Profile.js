@@ -2,9 +2,7 @@
 
 
 import * as React from 'react';
-import { Tabs, TabItem } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import { LauncherNavbar } from './Sidebar.js'
 
 function Profile() {
     return (

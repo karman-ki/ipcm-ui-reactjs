@@ -586,7 +586,7 @@ input:checked+.slider:before {
 
 .top-buttons {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-bottom: 40px;
 }
 

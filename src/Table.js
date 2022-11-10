@@ -3,6 +3,7 @@ import TableHead from "./TableHead";
 import TableHeadSearch from "./TableHeadSearch";
 import { SortData } from "./UpdateData";
 import { SearchData } from "./UpdateData";
+import React from 'react';
 
 export function PrepareData( tableData, columns, sortField, sortOrder, searchField, searchQuery, currentPage, entriesPerPage ) {
 

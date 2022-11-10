@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-
+import React from 'react';
 
 const TableHeadSearch = ({ columns, handleSearch }) => {
 
@@ -21,7 +19,7 @@ const TableHeadSearch = ({ columns, handleSearch }) => {
                                 <input className="input input-border text-field" type="text" id="search-field" onChange={(event) => handleSearchChange(event.target, accessor)} placeholder={label} title="Type in a name"></input>
                             </th>
                         );
-                    } else if (accessor == "processing_status") {
+                    } else if (accessor === "processing_status") {
                         return (<th key={accessor}>
                             <div className="process">
                                 <div className="process-labels">

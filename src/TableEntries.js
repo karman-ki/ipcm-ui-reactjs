@@ -1,3 +1,5 @@
+import React from 'react';
+
 const TableEntries = ({tableData, defaultEntriesPerPage, setEntriesPerPage}) => {
 
     const changeEntriesPerPage = (value) => {

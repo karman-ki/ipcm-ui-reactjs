@@ -1,4 +1,5 @@
 
+import React from 'react';
 
 const Timeline = ({ step }) => {
 
@@ -40,7 +41,7 @@ const Timeline = ({ step }) => {
         if (i < stepNum) {
             steps.push(ActiveNode(i));
             steps.push(ActivePath(i))
-        } else if (i == stepNum) {
+        } else if (i === stepNum) {
             if (i < len - 1) {
                 steps.push(ActiveNode(i))
                 steps.push(SemiActivePath(i))

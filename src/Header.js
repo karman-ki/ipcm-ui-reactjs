@@ -3,19 +3,18 @@ import React, { useState } from 'react'
 import BrandLogo from './logo.png'
 import { BsPersonSquare } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FiLogIn } from "react-icons/fi";
 
 
-function Login () {
-    var login = document.getElementById("header-login");
-    var loggedIn = document.getElementById("header-logged-in");
+// function Login () {
+//     var login = document.getElementById("header-login");
+//     var loggedIn = document.getElementById("header-logged-in");
 
-    if(loggedIn.style.display != "flex") {
-        loggedIn.style.display = "flex";
-        login.style.display = "none";
-    }
+//     if(loggedIn.style.display != "flex") {
+//         loggedIn.style.display = "flex";
+//         login.style.display = "none";
+//     }
 
-}
+// }
 
 function Header() {
 
@@ -40,8 +39,8 @@ function Header() {
             con.style.width = "calc(100% - var(--navbar-min-width))"
         } else {
             //navCon.style.display = "block";
-            for(var i = 0;i<texts.length;i++){
-                texts[i].style.display = "inline-block";
+            for(var j = 0;j<texts.length;j++){
+                texts[j].style.display = "inline-block";
             }
             nav.style.width = "var(--navbar-max-width)";
             nav.style.backgroundColor = "transparent"
@@ -55,7 +54,7 @@ function Header() {
             <div id="header">
                 <div className="header-left">
                     <div className="nav-brand">
-                        <img className="brand-logo" src={BrandLogo}></img>
+                        <img className="brand-logo" src={BrandLogo} alt="iPCM logo"></img>
                         <h1 className="main-title" >iPCM Leaderboard</h1>
                     </div>
                     <div id="nav-top">

@@ -14,12 +14,12 @@ export function SortData(data, sortField, sortOrder) {
         return sorted;
     }
     return data;
-};
+}
 
 export function SearchData(data, searchField, searchQuery, columns) {
     if (searchField) {
         let result = []
-        if (searchField == 'all') {
+        if (searchField === 'all') {
             for (let i = 0; i < data.length; i++) {
                 columns.every(col => {
                     let txtValue = "" + data[i][col['accessor']];
@@ -42,4 +42,4 @@ export function SearchData(data, searchField, searchQuery, columns) {
         }
     }
     return data;
-};
+}

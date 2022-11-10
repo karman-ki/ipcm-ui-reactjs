@@ -3,6 +3,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { BiEdit } from "react-icons/bi";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
+import React from 'react';
 
 
 const TableBody = ({ columns, tableData }) => {
@@ -13,8 +14,8 @@ const TableBody = ({ columns, tableData }) => {
                     <tr key={data.study_id}>
                         {columns.map(({ accessor }) => {
                             const tData = data[accessor] ? data[accessor] : "——";
-                            if (accessor == "processing_status") return <td key={accessor}>{<Timeline step={tData} />}</td>;
-                            else if (accessor == "action") {
+                            if (accessor === "processing_status") return <td key={accessor}>{<Timeline step={tData} />}</td>;
+                            else if (accessor === "action") {
                                 return (
                                     <td className="td-action">
                                         <button className='input-border action-buttons info-button'><IoMdInformationCircleOutline/></button>
@@ -22,7 +23,7 @@ const TableBody = ({ columns, tableData }) => {
                                         <button className='input-border action-buttons pending-button' >Pending</button>
                                     </td>
                                 )
-                            } else if (accessor == "action_cur") {
+                            } else if (accessor === "action_cur") {
                                 return (
                                     <td className="td-action">
                                         <button className='input-border action-buttons approved-button'><BsFillCheckCircleFill className="button-icon"/>Curation</button>

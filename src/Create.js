@@ -2,7 +2,7 @@ import * as React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import cancerList from "./cancer_type_list.json";
-import { Form, Formik, Field } from "formik";
+import { Form, Formik } from "formik";
 import { useField } from "formik";
 import * as yup from "yup";
 
@@ -90,13 +90,12 @@ const onSubmit = async (actions) => {
     console.log(actions)
     const form = document.getElementById('form');
     form.reset();
-
 };
 
 
 var cancerTypes = [{ value: 'select', label: '-- Select a cancer type --' }];
 for (let i = 0; i < cancerList.data.length; i++) {
-    cancerTypes[i + 1] = { key: 'value', key: 'label' };
+    cancerTypes[i + 1] = { val: 'value', key: 'label' };
     cancerTypes[i + 1]['value'] = cancerList.data[i].t_id;
     cancerTypes[i + 1]['label'] = cancerList.data[i].tissue_name;
 }
@@ -210,22 +209,22 @@ export default function Create() {
                                     </div>
                                     <div className='input-container'>
                                         <p>Germline DNA</p>
-                                        <label class="switch">
+                                        <label className="switch">
                                             <CheckboxInput
                                                 name="germline"
                                                 type="checkbox"
                                             />
-                                            <span class="slider round"></span>
+                                            <span className="slider round"></span>
                                         </label>
                                     </div>
                                     <div className='input-container'>
                                         <p>Blood collected before treatment start</p>
-                                        <label class="switch">
+                                        <label className="switch">
                                             <CheckboxInput
                                                 name="bloodCollected"
                                                 type="checkbox"
                                             />
-                                            <span class="slider round"></span>
+                                            <span className="slider round"></span>
                                         </label>
                                     </div>
                                 </Col>
@@ -242,7 +241,7 @@ export default function Create() {
             )}
         </Formik >
     );
-};
+}
 
 
 

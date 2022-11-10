@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "probiotrial",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/solgat/Documents/ProBio/react-amplified/amplify/backend/api/probiotrial/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    }
+  }
+}

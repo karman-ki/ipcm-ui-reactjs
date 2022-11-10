@@ -1,5 +1,5 @@
-import React, { useState, Component } from 'react'
-import { Table, InitSort, PrepareData } from "./Table.js";
+import React, { useState } from 'react'
+import { Table, InitSort } from "./Table.js";
 import tableData from "./inclusion_data.json";
 import { SortData } from "./UpdateData";
 
@@ -29,137 +29,137 @@ export default function Dashboard() {
           <div className="row">
 
             <div className="col-lg-3 col-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-olive"><i class="fa-solid fa-user-plus"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">New samples</span>
-                  <span class="info-box-number">80</span>
+              <div className="info-box">
+                <span className="info-box-icon bg-olive"><i className="fa-solid fa-user-plus"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">New samples</span>
+                  <span className="info-box-number">80</span>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-3 col-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fa-solid fa-list-check"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Approved by pathology</span>
-                  <span class="info-box-number">2</span>
+              <div className="info-box">
+                <span className="info-box-icon bg-yellow"><i className="fa-solid fa-list-check"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">Approved by pathology</span>
+                  <span className="info-box-number">2</span>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-3 col-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-cyan"><i class="fa-solid fa-dna"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Sequencing</span>
-                  <span class="info-box-number">0</span>
+              <div className="info-box">
+                <span className="info-box-icon bg-cyan"><i className="fa-solid fa-dna"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">Sequencing</span>
+                  <span className="info-box-number">0</span>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-3 col-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-pink"><i class="fa-solid fa-envelope-circle-check"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Data-delivered</span>
-                  <span class="info-box-number">1</span>
+              <div className="info-box">
+                <span className="info-box-icon bg-pink"><i className="fa-solid fa-envelope-circle-check"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">Data-delivered</span>
+                  <span className="info-box-number">1</span>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-3 col-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-lightblue"><i class="fa-solid fa-spinner"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Analysis in-progress</span>
-                  <span class="info-box-number">0</span>
+              <div className="info-box">
+                <span className="info-box-icon bg-lightblue"><i className="fa-solid fa-spinner"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">Analysis in-progress</span>
+                  <span className="info-box-number">0</span>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-3 col-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa-solid fa-thumbs-up"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Curation completed</span>
-                  <span class="info-box-number">0</span>
+              <div className="info-box">
+                <span className="info-box-icon bg-green"><i className="fa-solid fa-thumbs-up"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">Curation completed</span>
+                  <span className="info-box-number">0</span>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-3 col-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa-solid fa-file-lines"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Reports generated</span>
-                  <span class="info-box-number">0</span>
+              <div className="info-box">
+                <span className="info-box-icon bg-red"><i className="fa-solid fa-file-lines"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">Reports generated</span>
+                  <span className="info-box-number">0</span>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-3 col-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-blue"><i class="fa-solid fa-users"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Total samples</span>
-                  <span class="info-box-number">85</span>
+              <div className="info-box">
+                <span className="info-box-icon bg-blue"><i className="fa-solid fa-users"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">Total samples</span>
+                  <span className="info-box-number">85</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="row">
-            <div class="col-lg-6">
-              <div class="card">
-                <div class="card-header border-0">
-                  <div class="d-flex justify-content-between">
-                    <h3 class="card-title">Hospital-wise sample count</h3>
+            <div className="col-lg-6">
+              <div className="card">
+                <div className="card-header border-0">
+                  <div className="d-flex justify-content-between">
+                    <h3 className="card-title">Hospital-wise sample count</h3>
                   </div>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
 
-                  <div class="position-relative mb-4">
+                  <div className="position-relative mb-4">
                     <canvas id="sales-chart" height="200"></canvas>
                   </div>
-                  <div class="d-flex flex-row justify-content-end">
+                  <div className="d-flex flex-row justify-content-end">
                     <span>
-                      <i class="fas fa-square text-blue"></i> Count
+                      <i className="fas fa-square text-blue"></i> Count
                     </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-lg-6">
-              <div class="card">
-                <div class="card-header border-0">
-                  <div class="d-flex justify-content-between">
-                    <h3 class="card-title">Datetime-wise inclusion count</h3>
+            <div className="col-lg-6">
+              <div className="card">
+                <div className="card-header border-0">
+                  <div className="d-flex justify-content-between">
+                    <h3 className="card-title">Datetime-wise inclusion count</h3>
                   </div>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
 
-                  <div class="position-relative mb-4">
+                  <div className="position-relative mb-4">
                     <canvas id="visitors-chart" height="200"></canvas>
                   </div>
-                  <div class="d-flex flex-row justify-content-end">
+                  <div className="d-flex flex-row justify-content-end">
                     <span>
-                      <i class="fas fa-square text-primary"></i> Count
+                      <i className="fas fa-square text-primary"></i> Count
                     </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-header border-0">
-                  <div class="d-flex justify-content-between">
-                    <h3 class="card-title">Latest inclusion details</h3>
+            <div className="col-lg-12">
+              <div className="card">
+                <div className="card-header border-0">
+                  <div className="d-flex justify-content-between">
+                    <h3 className="card-title">Latest inclusion details</h3>
                   </div>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
                   <div className='table-container'>
                     <Table
                       tableData={data.slice(0, 4)}
