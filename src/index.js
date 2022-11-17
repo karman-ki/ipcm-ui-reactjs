@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import App from './App';
-import Dashboard from "./Dashboard";
-import Inclusion from "./Inclusion"
-import Curation from "./Curation"
-import Create from "./Create"
-import List from "./List"
-import Referral from "./Referral"
-import Sequencing from "./Sequencing"
-import Profile from "./Profile"
+import Dashboard from "./components/dashboard/Dashboard";
+import Inclusion from "./components/inclusion/Inclusion"
+import Curation from "./components/curation/Curation"
+import Create from "./components/eCRF/Create"
+import List from "./components/eCRF/List"
+import Referral from "./components/referral-db/Referral"
+import Sequencing from "./components/sequencing/Sequencing"
+import Profile from "./components/profile/Profile"
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';

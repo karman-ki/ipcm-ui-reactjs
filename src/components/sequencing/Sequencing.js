@@ -1,24 +1,25 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { Table, InitSort, PrepareData } from "./Table.js";
-import Pagination from "./Pagination.js";
-import tableData from "./data/biobank_data.json";
-import TableEntries from "./TableEntries";
-import TableSearchBar from "./TableSearchBar";
+import { Table, InitSort, PrepareData } from "../table/Table";
+import tableData from "../../data/sequencing_data.json";
 import { useState } from 'react';
 import "react-widgets/styles.css";
 import { GrRefresh } from "react-icons/gr";
-import { RiDatabase2Fill } from "react-icons/ri";
+import { FiUpload } from "react-icons/fi";
+import Pagination from "../table/Pagination";
+import TableEntries from "../table/TableEntries";
+import TableSearchBar from "../table/TableSearchBar";
+
 
 
 const columns = [
-    { label: "PNR", accessor: "pnr", sortable: true, searchable: true },
-    { label: "Date", accessor: "date", sortable: true, sortbyOrder: "desc", searchable: true },
+    { label: "Sequence name", accessor: "sequence_name", sortable: true, searchable: true },
+    { label: "CFDNA", accessor: "cfdna", sortable: true, searchable: true },
     { label: "RID", accessor: "rid", sortable: true, searchable: true },
-    { label: "CDK", accessor: "cdk", sortable: true, searchable: true },
-    { label: "Blood", accessor: "blood", sortable: true, searchable: true },
-    { label: "DNA1", accessor: "dna1", sortable: true, searchable: true },
-    { label: "DNA2", accessor: "dna2", sortable: true, searchable: true }
+    { label: "Study ID", accessor: "study_id", sortable: true, searchable: true },
+    { label: "Site name", accessor: "site_name", sortable: true, searchable: true },
+    { label: "Created on", accessor: "created_on", sortbyOrder: "desc", sortable: true, searchable: true },
+    { label: "Status", accessor: "status", sortable: true, searchable: true }
 
 ];
 
@@ -31,7 +32,7 @@ const columns = [
 
 
 
-function Referral() {
+function Sequencing() {
 
     var defaultEntriesPerPage = 10;
     var [initSortField, initSortOrder] = InitSort(columns);
@@ -49,10 +50,10 @@ function Referral() {
         <>
             <section>
                 <div className='section-step'>
-                    <h3>KI Biobank</h3>
+                    <h3>Sequencing</h3>
 
                     <div className='top-buttons'>
-                        <button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>
+                        <button className='input-border action-buttons edit-button'><FiUpload className="button-icon" />Upload orderform</button>
                         <button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
                     </div>
 
@@ -98,4 +99,4 @@ function Referral() {
 }
 
 
-export default Referral;
+export default Sequencing;

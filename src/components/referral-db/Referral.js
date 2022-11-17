@@ -1,25 +1,37 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { Table, InitSort, PrepareData } from "./Table.js";
-import Pagination from "./Pagination.js";
-import tableData from "./data/inclusion_data.json";
-import TableEntries from "./TableEntries";
-import TableSearchBar from "./TableSearchBar";
+import { Table, InitSort, PrepareData } from "../table/Table";
+import tableData from "../../data/biobank_data.json";
 import { useState } from 'react';
 import "react-widgets/styles.css";
 import { GrRefresh } from "react-icons/gr";
-
+import { RiDatabase2Fill } from "react-icons/ri";
+import Pagination from "../table/Pagination";
+import TableEntries from "../table/TableEntries";
+import TableSearchBar from "../table/TableSearchBar";
 
 
 const columns = [
-    { label: "Study ID", accessor: "study_id", sortable: true, searchable: true },
-    { label: "Site name", accessor: "site_name", sortable: true, searchable: true },
-    { label: "Created on", accessor: "created_on", sortable: true, sortbyOrder: "desc", searchable: true },
-    { label: "Processing status", accessor: "processing_status", sortable: false, searchable: false }
+    { label: "PNR", accessor: "pnr", sortable: true, searchable: true },
+    { label: "Date", accessor: "date", sortable: true, sortbyOrder: "desc", searchable: true },
+    { label: "RID", accessor: "rid", sortable: true, searchable: true },
+    { label: "CDK", accessor: "cdk", sortable: true, searchable: true },
+    { label: "Blood", accessor: "blood", sortable: true, searchable: true },
+    { label: "DNA1", accessor: "dna1", sortable: true, searchable: true },
+    { label: "DNA2", accessor: "dna2", sortable: true, searchable: true }
+
 ];
 
+// const numEntries = [
+//     { value: 10, label: 10 },
+//     { value: 25, label: 25 },
+//     { value: 50, label: 50 },
+//     { value: 100, label: 100 }
+// ]
 
-function Inclusion() {
+
+
+function Referral() {
 
     var defaultEntriesPerPage = 10;
     var [initSortField, initSortOrder] = InitSort(columns);
@@ -37,9 +49,10 @@ function Inclusion() {
         <>
             <section>
                 <div className='section-step'>
-                    <h3>Sample processing</h3>
+                    <h3>KI Biobank</h3>
 
                     <div className='top-buttons'>
+                        <button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>
                         <button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
                     </div>
 
@@ -85,4 +98,4 @@ function Inclusion() {
 }
 
 
-export default Inclusion;
+export default Referral;

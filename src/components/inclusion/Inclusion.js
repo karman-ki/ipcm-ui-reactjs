@@ -1,39 +1,25 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { Table, InitSort, PrepareData } from "./Table.js";
-import Pagination from "./Pagination.js";
-import tableData from "./data/sequencing_data.json";
-import TableEntries from "./TableEntries";
-import TableSearchBar from "./TableSearchBar";
+import { Table, InitSort, PrepareData } from "../table/Table";
+import tableData from "../../data/inclusion_data.json";
 import { useState } from 'react';
 import "react-widgets/styles.css";
 import { GrRefresh } from "react-icons/gr";
-import { FiUpload } from "react-icons/fi";
-
+import Pagination from "../table/Pagination";
+import TableEntries from "../table/TableEntries";
+import TableSearchBar from "../table/TableSearchBar";
 
 
 
 const columns = [
-    { label: "Sequence name", accessor: "sequence_name", sortable: true, searchable: true },
-    { label: "CFDNA", accessor: "cfdna", sortable: true, searchable: true },
-    { label: "RID", accessor: "rid", sortable: true, searchable: true },
     { label: "Study ID", accessor: "study_id", sortable: true, searchable: true },
     { label: "Site name", accessor: "site_name", sortable: true, searchable: true },
-    { label: "Created on", accessor: "created_on", sortbyOrder: "desc", sortable: true, searchable: true },
-    { label: "Status", accessor: "status", sortable: true, searchable: true }
-
+    { label: "Created on", accessor: "created_on", sortable: true, sortbyOrder: "desc", searchable: true },
+    { label: "Processing status", accessor: "processing_status", sortable: false, searchable: false }
 ];
 
-// const numEntries = [
-//     { value: 10, label: 10 },
-//     { value: 25, label: 25 },
-//     { value: 50, label: 50 },
-//     { value: 100, label: 100 }
-// ]
 
-
-
-function Sequencing() {
+function Inclusion() {
 
     var defaultEntriesPerPage = 10;
     var [initSortField, initSortOrder] = InitSort(columns);
@@ -51,10 +37,9 @@ function Sequencing() {
         <>
             <section>
                 <div className='section-step'>
-                    <h3>Sequencing</h3>
+                    <h3>Sample processing</h3>
 
                     <div className='top-buttons'>
-                        <button className='input-border action-buttons edit-button'><FiUpload className="button-icon" />Upload orderform</button>
                         <button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
                     </div>
 
@@ -100,4 +85,4 @@ function Sequencing() {
 }
 
 
-export default Sequencing;
+export default Inclusion;

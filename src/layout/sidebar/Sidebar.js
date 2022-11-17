@@ -7,7 +7,7 @@ import { CgList } from "react-icons/cg";
 import { BiTestTube } from "react-icons/bi";
 import { TbDna2 } from "react-icons/tb";
 import { BsFillPersonCheckFill } from "react-icons/bs";
-import './index.css';
+// import './index.css';
 
 
 export function Sidebar() {

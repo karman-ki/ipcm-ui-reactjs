@@ -1,13 +1,13 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { Table, InitSort, PrepareData } from "./Table.js";
-import Pagination from "./Pagination.js";
-import tableData from "./data/ecrf_data.json";
-import TableEntries from "./TableEntries";
-import TableSearchBar from "./TableSearchBar";
+import { Table, InitSort, PrepareData } from "../table/Table";
+import tableData from "../../data/ecrf_data.json";
 import { useState } from 'react';
 import "react-widgets/styles.css";
 import { GrRefresh } from "react-icons/gr";
+import Pagination from "../table/Pagination";
+import TableEntries from "../table/TableEntries";
+import TableSearchBar from "../table/TableSearchBar";
 
 
 

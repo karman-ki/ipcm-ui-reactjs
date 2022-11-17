@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Table, InitSort } from "./Table.js";
-import tableData from "./data/inclusion_data.json";
-import { SortData } from "./UpdateData";
+import { Table, InitSort } from "../table/Table";
+import tableData from "../../data/inclusion_data.json";
+import { SortData } from "../table/UpdateData";
 
 
 const columns = [

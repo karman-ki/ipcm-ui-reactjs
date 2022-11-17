@@ -1,11 +1,11 @@
 /* src/App.js */
 import * as React from 'react';
 import '@aws-amplify/ui-react/styles.css';
-import { Sidebar } from './Sidebar.js'
 import { Outlet } from "react-router-dom";
 import './index.css';
-import Footer from "./Footer"
-import Header from "./Header"
+import Header from "./layout/header/Header"
+import { Sidebar } from './layout/sidebar/Sidebar'
+import Footer from "./layout/footer/Footer"
 
 
 const App = () => {
