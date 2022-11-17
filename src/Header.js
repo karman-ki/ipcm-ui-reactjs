@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React, { useState } from 'react'
-import BrandLogo from './logo.png'
+import BrandLogo from './assets/images/logo/logo.png'
 import { BsPersonSquare } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 

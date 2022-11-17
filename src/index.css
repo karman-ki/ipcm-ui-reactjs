@@ -424,7 +424,7 @@ select.input-error {
 select {
   font-weight: 400;
   font-size: 0.9rem;
-  background: url(./arrow-down-bold-svgrepo-com.svg) no-repeat center white;
+  background: url(./assets/images/arrow-down-bold-svgrepo-com.svg) no-repeat center white;
   background-size: 0.9rem;
   -webkit-appearance: none;
   background-position-x: 95%;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Table, InitSort } from "./Table.js";
-import tableData from "./inclusion_data.json";
+import tableData from "./data/inclusion_data.json";
 import { SortData } from "./UpdateData";
 
 

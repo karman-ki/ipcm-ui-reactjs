@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import cancerList from "./cancer_type_list.json";
+import cancerList from "./data/cancer_type_list.json";
 import { Form, Formik } from "formik";
 import { useField } from "formik";
 import * as yup from "yup";

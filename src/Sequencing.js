@@ -2,7 +2,7 @@ import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { Table, InitSort, PrepareData } from "./Table.js";
 import Pagination from "./Pagination.js";
-import tableData from "./sequencing_data.json";
+import tableData from "./data/sequencing_data.json";
 import TableEntries from "./TableEntries";
 import TableSearchBar from "./TableSearchBar";
 import { useState } from 'react';
