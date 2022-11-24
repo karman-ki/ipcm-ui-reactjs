@@ -52,7 +52,7 @@ export default function Dashboard() {
               <div className="info-box">
                 <span className="info-box-icon bg-cyan"><i className="fa-solid fa-dna"></i></span>
                 <div className="info-box-content">
-                  <span className="info-box-text">Sequencing</span>
+                  <span className="info-box-text">Sequenced</span>
                   <span className="info-box-number">0</span>
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function Dashboard() {
               <div className="card">
                 <div className="card-header border-0">
                   <div className="d-flex justify-content-between">
-                    <h3 className="card-title">Datetime-wise inclusion count</h3>
+                    <h3 className="card-title">Date-wise inclusion count</h3>
                   </div>
                 </div>
                 <div className="card-body">

@@ -27,7 +27,7 @@ function App() {
                                 <img className="login-logo" src={BrandLogo}></img>
                             </div>
                             <h1>
-                                Welcome to iPCM
+                                iPCM leaderboard
                             </h1>
 
 
@@ -38,7 +38,7 @@ function App() {
                             <MDBCardBody className='login-form'>
 
                                 <h3 className='text-center mb-5'>
-                                    <b>Sign in</b>
+                                    <b>Login</b>
                                 </h3>
 
                                 <MDBInput wrapperClass='mb-4' label='Email' id='email' type='email' />

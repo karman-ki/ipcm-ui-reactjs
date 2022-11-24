@@ -21,13 +21,13 @@ const columns = [
     { label: "DNA2", accessor: "dna2", sortable: true, searchable: true }
 
 ];
-
+//src/components/referral-db
 // const numEntries = [
 //     { value: 10, label: 10 },
 //     { value: 25, label: 25 },
 //     { value: 50, label: 50 },
 //     { value: 100, label: 100 }
-// ]
+// ]  
 
 
 
@@ -49,7 +49,7 @@ function Referral() {
         <>
             <section>
                 <div className='section-step'>
-                    <h3>KI Biobank</h3>
+                    <h3>Referral DB from KI Biobank</h3>
 
                     <div className='top-buttons'>
                         <button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>

@@ -50,10 +50,10 @@ function Sequencing() {
         <>
             <section>
                 <div className='section-step'>
-                    <h3>Sequencing</h3>
+                    <h3>Sequenced</h3>
 
                     <div className='top-buttons'>
-                        <button className='input-border action-buttons edit-button'><FiUpload className="button-icon" />Upload orderform</button>
+                        <button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
                         <button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
                     </div>
 

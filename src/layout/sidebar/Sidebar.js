@@ -43,7 +43,7 @@ export function Sidebar() {
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/sequencing" >
             <TbDna2 className="nav-img"/>
-            <span className="navlink-text">Sequencing</span>
+            <span className="navlink-text">Sequenced</span>
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? "nav-link active" : 'nav-link')} to="/curation" >
             <RiRocket2Line className="nav-img"/>
