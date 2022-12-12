@@ -16,6 +16,7 @@ const COLUMNS = [
     // Build our expander column
     id: "expander", // Make sure it has an ID
     Header: "",
+    disableGlobalFilter: true
   },
   { Header: "PNR", accessor: "pnr",Filter: ColumnFilter},
   { Header: "Date", accessor: "datum" ,Filter: ColumnFilter},
@@ -28,7 +29,7 @@ const COLUMNS = [
 
 const dataset = []; 
 
-axios.post("http://localhost:8500/ipcm-api/iPCM/referral_list?s_id=316")
+const fetchDataSet= axios.post("http://localhost:8500/ipcm-api/iPCM/referral_list?s_id=316")
 .then(function (response) {
   var resultSet= response.data.data.length;
   if (resultSet >= 1){
@@ -37,30 +38,9 @@ axios.post("http://localhost:8500/ipcm-api/iPCM/referral_list?s_id=316")
   }
 });
 
-const clickRefresh = () => {
-  console.log("!!!Button click!!!");
-};
+ 
 
-function ReferralDb () {
-
-
-  // const [dataset, setDataset] = useState([]);
-
-  // Similar to componentDidMount and componentDidUpdate:
-  // useEffect(() => {
-  //   // Update the document title using the browser API
-  //   axios.post("http://localhost:8500/ipcm-api/iPCM/referral_list?s_id=316")
-  //   .then(function (response) {
-  //     var resultSet= response.data.data.length;
-  //     const dataset = []
-  //     if (resultSet >= 1){
-  //       for (let i = 0; i < resultSet; i++) 
-  //       dataset.push(response.data.data[i]);
-  //     }
-  //     setDataset(dataset);
-  //   });
-  // });
-  
+function ReferralDb () { 
   const columns = useMemo(() => COLUMNS , [])
   const data = useMemo(() => dataset , [])
   //setting default sort values
@@ -95,8 +75,9 @@ function ReferralDb () {
     columns : COLUMNS,
     data : dataset,
     initialState:{ 
-      sortBy: sortees,
-      pageSize:10,
+    sortBy: sortees,
+    pageSize:10,
+    //hiddenColumns: ['expander'],
      }
   },
   useFilters,
@@ -114,8 +95,8 @@ function ReferralDb () {
     <div className='section-step'>
         <h3>Referral DB from KI Biobank</h3>
             <div className='top-buttons'>
-            <button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>
-            <button className='input-border action-buttons info-button' onClick={clickRefresh}><GrRefresh className="button-icon" />Refresh</button>
+              <button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>
+              <button className='input-border action-buttons info-button' ><GrRefresh className="button-icon" />Refresh</button>
             </div>
     </div> 
     <div className='table-body-accessories'>
@@ -157,7 +138,8 @@ function ReferralDb () {
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
               <th {...column.getHeaderProps()}>
-                  <div>
+                {}
+                  <div>                 
                     {column.canFilter ? column.render('Filter') : null}
                   </div>
               </th>
@@ -167,14 +149,14 @@ function ReferralDb () {
       </thead>
 
       <tbody {...getTableBodyProps()}>
-      {page.map((row, i) => {
+      {page.map(row => {
           prepareRow(row)
           return (
             <React.Fragment>
             <tr {...row.getRowProps()}>
               {                              
                 row.cells.map(cell => {
-                  return (cell.value == '' || cell.value == 'undefined' || cell.value == undefined )?
+                  return (cell.value === '' || cell.value === 'undefined' || cell.value === undefined )?
                     <td>               
                     <span
                       {...row.getToggleRowExpandedProps({
@@ -214,6 +196,7 @@ function ReferralDb () {
             )
         })}
       </tbody>
+      
     </table>
     <div className="text-center">
       <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>

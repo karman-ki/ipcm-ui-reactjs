@@ -31,13 +31,7 @@ const fetchDataSet = axios.post("http://localhost:8500/ipcm-api/iPCM/sequence_li
   }
 });
 
-
-
-const clickRefresh = () => {
-  console.log("!!!Button click!!!");
-};
-
-const Sequencing = () => {
+function Sequencing() {
 
   const columns = useMemo(() => COLUMNS , [])
   const data = useMemo(() => DATASET , [])
@@ -86,17 +80,16 @@ const Sequencing = () => {
 
   return (
     <>    
-                <div className='section-step'>
-                    <h3>Sequenced</h3>
+      <div className='section-step'>
+          <h3>Sequenced</h3>
 
-                    <div className='top-buttons'>
-                        <button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
-                        <button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
-                    </div>     
-    <div>
-    <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-    </div> 
-    <div> 
+          <div className='top-buttons'>
+              <button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
+              <button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
+          </div>
+      </div>       
+            <div className='table-body-accessories'>
+             <div>
             Number of table entries:             
            <select className='input input-border select entries-picker' 
                 value={pageSize}
@@ -108,8 +101,11 @@ const Sequencing = () => {
                    </option>
                 ))}
             </select>
-            
-        </div>  
+            </div>
+      <div>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+      </div>             
+      </div>  
       <div>
       <div>
    
@@ -163,7 +159,6 @@ const Sequencing = () => {
         </strong>
       </span>
       <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
-    </div>
     </div>
     </div>
     </div>

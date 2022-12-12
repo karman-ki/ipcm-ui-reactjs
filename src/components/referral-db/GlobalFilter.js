@@ -2,10 +2,9 @@ import React from "react";
 
 const GlobalFilter = ({filter, setFilter}) => {
     return(
-        <div>
+        <div className='table-search' >
             Search : {' '}
         <input 
-            className='table-search' 
             value={filter || ''} 
             onChange={(e) => setFilter(e.target.value)} 
           />               
