@@ -8,9 +8,9 @@ import Inclusion from "./components/inclusion/Inclusion"
 import Curation from "./components/curation/Curation"
 import Create from "./components/eCRF/Create"
 import List from "./components/eCRF/List"
-import Referral from "./components/referral-db/Referral"
-import Sequencing from "./components/sequencing/Sequencing"
 import Profile from "./components/profile/Profile"
+import ReferralDb from "./components/referral-db/ReferralDb"
+import Sequencing from "./components/sequencing/Sequencing";
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -34,8 +34,8 @@ root.render(
           <Route path="inclusion" element={<Inclusion />} />
           <Route path="Curation" element={<Curation />} />
           <Route path="list" element={<List />} />
-          <Route path="referral" element={<Referral />} />
-          <Route path="sequencing" element={<Sequencing />} />
+          <Route path="referralDb" element={<ReferralDb />} />
+          <Route path="Sequencing" element={<Sequencing />} />
           <Route path="profile" element={<Profile />} />
 
           {/*<Route path="*" element={<NoPage />} />*/}

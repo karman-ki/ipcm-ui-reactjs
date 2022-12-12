@@ -135,7 +135,7 @@ export default function Dashboard() {
               <div className="card">
                 <div className="card-header border-0">
                   <div className="d-flex justify-content-between">
-                    <h3 className="card-title">Date-wise inclusion count</h3>
+                    <h3 className="card-title"> inclusion count</h3>
                   </div>
                 </div>
                 <div className="card-body">

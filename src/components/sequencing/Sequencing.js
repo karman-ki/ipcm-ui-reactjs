@@ -1,102 +1,174 @@
-import React from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import { Table, InitSort, PrepareData } from "../table/Table";
-import tableData from "../../data/sequencing_data.json";
-import { useState } from 'react';
+import React, {useState, useEffect,useMemo } from "react";
+import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination} from "react-table";
+import axios from "axios";
+import './Table.css';
 import "react-widgets/styles.css";
+import ColumnFilter from "./ColumnFilter";
+import GlobalFilter from "./GlobalFilter";
 import { GrRefresh } from "react-icons/gr";
-import { FiUpload } from "react-icons/fi";
-import Pagination from "../table/Pagination";
-import TableEntries from "../table/TableEntries";
-import TableSearchBar from "../table/TableSearchBar";
+import { FiUpload } from "react-icons/fi"; 
+import 'react-toastify/dist/ReactToastify.css';
 
 
-
-const columns = [
-    { label: "Sequence name", accessor: "sequence_name", sortable: true, searchable: true },
-    { label: "CFDNA", accessor: "cfdna", sortable: true, searchable: true },
-    { label: "RID", accessor: "rid", sortable: true, searchable: true },
-    { label: "Study ID", accessor: "study_id", sortable: true, searchable: true },
-    { label: "Site name", accessor: "site_name", sortable: true, searchable: true },
-    { label: "Created on", accessor: "created_on", sortbyOrder: "desc", sortable: true, searchable: true },
-    { label: "Status", accessor: "status", sortable: true, searchable: true }
-
+const COLUMNS = [
+  { Header: "Sequence name", accessor: "sequence_name",Filter: ColumnFilter},
+  { Header: "CFDNA", accessor: "cfdna" ,Filter: ColumnFilter},
+  { Header: "RID", accessor: "rid",Filter: ColumnFilter},
+  { Header: "Study ID", accessor: "sd_id",Filter: ColumnFilter},
+  { Header: "Site name", accessor: "site_name" ,Filter: ColumnFilter},
+  { Header: "Created on", accessor: "created_on",Filter: ColumnFilter},
+  { Header: "Status", accessor: "seq_status",Filter: ColumnFilter}
 ];
 
-// const numEntries = [
-//     { value: 10, label: 10 },
-//     { value: 25, label: 25 },
-//     { value: 50, label: 50 },
-//     { value: 100, label: 100 }
-// ]
+const DATASET = []; 
+
+const fetchDataSet = axios.post("http://localhost:8500/ipcm-api/iPCM/sequence_list?s_id=316&u_id=6")
+.then(function (response) {
+  var resultSet= response.data.data.length;
+  if (resultSet >= 1){
+    for (let i = 0; i < resultSet; i++) 
+    DATASET.push(response.data.data[i]);
+  }
+});
 
 
 
-function Sequencing() {
+const clickRefresh = () => {
+  console.log("!!!Button click!!!");
+};
 
-    var defaultEntriesPerPage = 10;
-    var [initSortField, initSortOrder] = InitSort(columns);
+const Sequencing = () => {
 
-    const [sortField, setSortField] = useState(initSortField);
-    const [sortOrder, setSortOrder] = useState(initSortOrder);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [searchField, setSearchField] = useState(columns[0]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [entriesPerPage, setEntriesPerPage] = useState(defaultEntriesPerPage);
+  const columns = useMemo(() => COLUMNS , [])
+  const data = useMemo(() => DATASET , [])
+  //setting default sort values
+  const sortees = React.useMemo(
+    () => [
+      { 
+        id: 'sd_id',
+        desc: true
+      },     
+      { 
+        id: 'rid',
+        desc: true
+      },
+      ],
+    []
+  );
 
-    var [data, nPages] = PrepareData(tableData, columns, sortField, sortOrder, searchField, searchQuery, currentPage, entriesPerPage);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    setPageSize,
+    prepareRow,
+    state,
+    setGlobalFilter,
+  } = useTable({
+    columns : COLUMNS,
+    data : DATASET,
+    initialState:{ sortBy: sortees }
+  },
+  useFilters,
+  useGlobalFilter,
+  useSortBy,
+  usePagination)
 
-    return (
-        <>
-            <section>
+  const {globalFilter} = state
+  const {pageIndex,pageSize} = state
+
+    
+
+  return (
+    <>    
                 <div className='section-step'>
                     <h3>Sequenced</h3>
 
                     <div className='top-buttons'>
                         <button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
                         <button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
-                    </div>
+                    </div>     
+    <div>
+    <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+    </div> 
+    <div> 
+            Number of table entries:             
+           <select className='input input-border select entries-picker' 
+                value={pageSize}
+                onChange={(e) => setPageSize(Number(e.target.value))}
+            >
+                {[10,25,50,100].map((pageSize) => (
+                  <option key={pageSize} value={pageSize}>
+                    {pageSize}
+                   </option>
+                ))}
+            </select>
+            
+        </div>  
+      <div>
+      <div>
+   
+    <table {...getTableProps()}>
+      <thead>
+          {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                {column.render("Header")}
+                  <span>
+                    {column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↑↓'}
+                  </span>
+              </th>
+            ))}
+          </tr>          
+        ))}
 
-                    <div className='table-top'>
-                        <TableEntries
-                            tableData={tableData}
-                            defaultEntriesPerPage={defaultEntriesPerPage}
-                            setEntriesPerPage={setEntriesPerPage}
-                        />
-                        <TableSearchBar
-                            setSearchQuery={setSearchQuery}
-                            setSearchField={setSearchField}
-                        />
-                    </div>
+          {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps()}>
+                {}
+                  <div>
+                    {column.canFilter ? column.render('Filter') : null}
+                  </div>
+              </th>
+            ))}
+          </tr>          
+        ))}
+      </thead>
 
-                    <div className='table-container'>
-                        <Table
-                            key={currentPage + ":" + entriesPerPage}
-                            tableData={data}
-                            columns={columns}
-                            order={sortOrder}
-                            sortField={sortField}
-                            handleSort={(accessor, order) => {
-                                setSortField(accessor);
-                                setSortOrder(order);
-                            }}
-                            handleSearch={(query, accessor) => {
-                                setSearchQuery(query);
-                                setSearchField(accessor);
-                            }}
-                        />
-                    </div>
-                    <Pagination
-                        nPages={nPages}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                    />
-
-                </div>
-            </section>
-        </>
-    );
+      <tbody {...getTableBodyProps()}>
+        {page.map(row => {
+          prepareRow(row)
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map(cell => {
+                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+              })}
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+    <div>
+      <button  onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+      <span>
+        <strong>
+          {pageIndex + 1}
+        </strong>
+      </span>
+      <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </>
+  )
 }
-
 
 export default Sequencing;
