@@ -23,7 +23,7 @@ export default function Dashboard() {
   var data = SortData(tableData, sortField, sortOrder);
 
   return (
-    <div>
+    <>
       <section className="content">
         <div className="container-fluid">
           <div className="row">
@@ -178,6 +178,6 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
-    </div >
+    </>
   )
 }

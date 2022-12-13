@@ -51,7 +51,6 @@
 
 .sidebar-item.plain.active, .sidebar-item.plain:hover {
 	text-decoration: none;
-	/* background-color: rgba(173, 167, 167, 0.1); */
 	color: var(--accent-color);
 }
 

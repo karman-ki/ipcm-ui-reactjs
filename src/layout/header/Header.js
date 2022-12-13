@@ -18,22 +18,20 @@ function Header() {
         var texts = document.getElementsByClassName("navlink-text")
 
         if (!isOpen) {
-            //navCon.style.display = "none";
             for(var i = 0;i<texts.length;i++){
                 texts[i].style.display = "none";
             }
             nav.style.width = "var(--navbar-min-width)";
             nav.style.backgroundColor = "var(--navbar-background-color)"
-            con.style.marginLeft = "var(--navbar-min-width)";
+            // con.style.marginLeft = "var(--navbar-min-width)";
             con.style.width = "calc(100% - var(--navbar-min-width))"
         } else {
-            //navCon.style.display = "block";
             for(var j = 0;j<texts.length;j++){
                 texts[j].style.display = "inline-block";
             }
             nav.style.width = "var(--navbar-max-width)";
             nav.style.backgroundColor = "transparent"
-            con.style.marginLeft = "var(--navbar-max-width)";
+            // con.style.marginLeft = "var(--navbar-max-width)";
             con.style.width = "calc(100% - var(--navbar-max-width))"
         }
     }
