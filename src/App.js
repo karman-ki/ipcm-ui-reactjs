@@ -10,25 +10,23 @@ import Footer from "./layout/footer/Footer";
 
 const App = () => {
 
-  return (
-    <>
-      <div id='page-container'>
-        <div id='wrapper'>
-          <Header />
-          <div> 
-            <div id='content-wrapper'>
-            <Sidebar />
-              <div id='content'>
-                <Outlet />
-                <Footer />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+	return (
+		<>
+			<div id='page-container'>
+				<div id='wrapper'>
+					<Header />
+					<div id='content-wrapper'>
+						<Sidebar />
+						<div id='content'>
+							<Outlet />
+						</div>
+					</div>
+					<Footer />
+				</div>
+			</div>
+		</>
 
-  );
+	);
 }
 
 export default App;

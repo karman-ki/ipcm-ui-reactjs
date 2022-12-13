@@ -5,17 +5,6 @@ import { BsPersonSquare } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 
-// function Login () {
-//     var login = document.getElementById("header-login");
-//     var loggedIn = document.getElementById("header-logged-in");
-
-//     if(loggedIn.style.display != "flex") {
-//         loggedIn.style.display = "flex";
-//         login.style.display = "none";
-//     }
-
-// }
-
 function Header() {
 
     const [isOpen, setOpen] = useState(false);
