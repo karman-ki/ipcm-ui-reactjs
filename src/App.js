@@ -36,7 +36,7 @@ const App = () => {
 					<Route path="Curation" element={<Curation />} />
 					<Route path="list" element={<List />} />
 					<Route path="referralDb" element={<ReferralDb />} />
-					<Route path="Sequencing" element={<Sequencing />} />
+					<Route path="sequencing" element={<Sequencing />} />
 				</Route>
 			</Routes>
 		</>

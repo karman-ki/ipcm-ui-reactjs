@@ -19,18 +19,19 @@ body {
 	--navbar-max-width: 15rem;
 	--navbar-min-width: 4rem;
 	font-family: 'Roboto Slab', serif;
+	font-size: 14px;
+	line-height: 2.2;
 }
 
 section {
 	background-color: var(--page-background-color);
 	display: flex;
 	flex-direction: column;
-	/* margin: 10px; */
 }
 
 .section-step {
-	padding: 30px 30px 50px 30px;
-	margin-bottom: 12px;
+	padding: 30px 30px;
+	margin: 20px 0px;
 	background-color: var(--section-background-color);
 	box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
 	border-radius: 0.25rem;
@@ -81,12 +82,12 @@ h5 {
 
 /*** Page ***/
 
-#page-container {
+/* #page-container {
 	position: relative;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-}
+} */
 
 #wrapper {
 	height: 100%;
@@ -105,6 +106,7 @@ h5 {
 	overflow: auto;
 	vertical-align: top;
 	transition: 0.5s;
+	padding-bottom: 50px;
 }
 
 /** Login **/
@@ -235,14 +237,13 @@ h5 {
 /*** Footer ***/
 
 .main-footer {
+	position: fixed;
 	background-color: var(--navbar-divider-color);
 	color: var(--navbar-text-color);
-	padding: 1rem;
+	padding: 10px;
 	bottom: 0;
 	left: 0;
-	position: fixed;
 	right: 0;
-	display: block;
 	text-align: center;
 }
 
@@ -289,12 +290,12 @@ h5 {
 	align-items: flex-start;
 	left: 0;
 	position: relative;
-	overflow: auto;
+	/* overflow: auto; */
 	vertical-align: top;
 	padding: 0px;
 	border-top: solid var(--navbar-divider-color) 1px;
 	/* height: 100%; */
-	min-height: 80px;
+	min-height: 100px;
 	overflow: hidden;
 }
 
@@ -417,32 +418,28 @@ select.input-error {
 	font-weight: 400;
 }
 
-.table-search {
-	display: flex;
-	align-items: baseline;
-}
-
-.table-searchfield {
-	margin-left: 10px;
-}
-
 select {
 	font-weight: 400;
 	font-size: 0.9rem;
-	background: url(./assets/images/arrow-down-bold-svgrepo-com.svg) no-repeat center white;
+	/* background: url(./assets/images/arrow-down-bold-svgrepo-com.svg) no-repeat center white; */
 	background-size: 0.9rem;
-	-webkit-appearance: none;
+	--webkit-appearance: none;
 	background-position-x: 95%;
+}
+
+.form-group {
+	margin: 0px;
 }
 
 .entries-picker {
 	min-width: 50px;
 	width: 4rem;
 	height: 30px;
-	background-size: 0.7rem;
+	/* background-size: 0.7rem;
 	background-position-x: 90%;
 	display: inline-block;
-	margin-left: 10px;
+	margin-left: 10px; */
+	margin: 5px;
 }
 
 .checkbox {

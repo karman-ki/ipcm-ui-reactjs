@@ -1,15 +1,14 @@
 import React, {useMemo } from "react";
 import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination} from "react-table";
-import axios from "axios";
-import './Table.css';
-import "react-widgets/styles.css";
-import ColumnFilter from "./ColumnFilter";
-import GlobalFilter from "./GlobalFilter";
 import { GrRefresh } from "react-icons/gr";
 import { FiUpload } from "react-icons/fi"; 
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate, Navigate } from "react-router-dom";
+import axios from "axios";
+import ColumnFilter from "../table-react/ColumnFilter";
+import GlobalFilter from "../table-react/GlobalFilter";
 
+import "react-widgets/styles.css";
+import 'react-toastify/dist/ReactToastify.css';
+import '../table-react/Table.css';
 
 const COLUMNS = [
   { Header: "Sequence name", accessor: "sequence_name",Filter: ColumnFilter},
@@ -27,55 +26,48 @@ const fetchDataSet = axios.post("http://localhost:8500/ipcm-api/iPCM/sequence_li
 .then(function (response) {
   var resultSet= response.data.data.length;
   if (resultSet >= 1){
-    for (let i = 0; i < resultSet; i++) 
-    DATASET.push(response.data.data[i]);
+	for (let i = 0; i < resultSet; i++) 
+	DATASET.push(response.data.data[i]);
   }
   return DATASET;
 });
 
 function Sequencing() {
 
-  const isAuthenticated = sessionStorage.getItem("authenticated");
-
-	if (isAuthenticated) {
-		return <Navigate to="/" />
-	}
-
-
   const columns = useMemo(() => COLUMNS , [])
   const data = useMemo(() => fetchDataSet , [])
   //setting default sort values
   const sortees = React.useMemo(
-    () => [
-      { 
-        id: 'sd_id',
-        desc: true
-      },     
-      { 
-        id: 'rid',
-        desc: true
-      },
-      ],
-    []
+	() => [
+	  { 
+		id: 'sd_id',
+		desc: true
+	  },     
+	  { 
+		id: 'rid',
+		desc: true
+	  },
+	  ],
+	[]
   );
 
   const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    setPageSize,
-    prepareRow,
-    state,
-    setGlobalFilter,
+	getTableProps,
+	getTableBodyProps,
+	headerGroups,
+	page,
+	nextPage,
+	previousPage,
+	canNextPage,
+	canPreviousPage,
+	setPageSize,
+	prepareRow,
+	state,
+	setGlobalFilter,
   } = useTable({
-    columns : COLUMNS,
-    data : DATASET,
-    initialState:{ sortBy: sortees }
+	columns : COLUMNS,
+	data : DATASET,
+	initialState:{ sortBy: sortees }
   },
   useFilters,
   useGlobalFilter,
@@ -85,93 +77,92 @@ function Sequencing() {
   const {globalFilter} = state
   const {pageIndex,pageSize} = state
 
-    
+	
 
   return (
-    <>    
-      <div className='section-step'>
-          <h3>Sequenced</h3>
+	<>
+		<div className="container-fluid">
+			<div className='section-step'>
+				<h3>Sequenced</h3>
+				<div className='top-buttons'>
+					<button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
+					<button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
+				</div>
+				<div class="table-body-accessories">
+					<div class="mr-auto p-2">
+						<div class="form-inline">
+							<label>Show 
+								<select className='input input-border select entries-picker' 
+									value={pageSize}
+									onChange={(e) => setPageSize(Number(e.target.value))} >
+									{[10,25,50,100].map((pageSize) => (
+										<option key={pageSize} value={pageSize}>
+										{pageSize}
+										</option>
+									))}
+								</select>
+								entries
+							</label>
+						</div>
+					</div>
+					<div class="p-2">
+						<GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+					</div>
+				</div>
+				<div>
+					<table {...getTableProps()}>
+						<thead>
+							{headerGroups.map(headerGroup => (
+								<tr {...headerGroup.getHeaderGroupProps()}>
+								{headerGroup.headers.map(column => (
+									<th {...column.getHeaderProps(column.getSortByToggleProps())}>
+									{column.render("Header")}
+										<span>
+										{column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↑↓'}
+										</span>
+									</th>
+								))}
+								</tr>          
+							))}
 
-          <div className='top-buttons'>
-              <button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
-              <button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
-          </div>
-      </div>       
-            <div className='table-body-accessories'>
-             <div>
-            Number of table entries:             
-           <select className='input input-border select entries-picker' 
-                value={pageSize}
-                onChange={(e) => setPageSize(Number(e.target.value))}
-            >
-                {[10,25,50,100].map((pageSize) => (
-                  <option key={pageSize} value={pageSize}>
-                    {pageSize}
-                   </option>
-                ))}
-            </select>
-            </div>
-      <div>
-        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-      </div>             
-      </div>  
-      <div>
-      <div>
-   
-    <table {...getTableProps()}>
-      <thead>
-          {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render("Header")}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↑↓'}
-                  </span>
-              </th>
-            ))}
-          </tr>          
-        ))}
+							{headerGroups.map(headerGroup => (
+								<tr {...headerGroup.getHeaderGroupProps()}>
+								{headerGroup.headers.map(column => (
+									<th {...column.getHeaderProps()}>
+									{}
+										<div>
+										{column.canFilter ? column.render('Filter') : null}
+										</div>
+									</th>
+								))}
+								</tr>          
+							))}
+						</thead>
 
-          {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>
-                {}
-                  <div>
-                    {column.canFilter ? column.render('Filter') : null}
-                  </div>
-              </th>
-            ))}
-          </tr>          
-        ))}
-      </thead>
-
-      <tbody {...getTableBodyProps()}>
-        {page.map(row => {
-          prepareRow(row)
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
-    <div>
-      <button  onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-      <span>
-        <strong>
-          {pageIndex + 1}
-        </strong>
-      </span>
-      <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
-    </div>
-    </div>
-    </div>
-    </>
+						<tbody {...getTableBodyProps()}>
+							{page.map(row => {
+								prepareRow(row)
+								return (
+								<tr {...row.getRowProps()}>
+									{row.cells.map(cell => {
+									return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+									})}
+								</tr>
+								)
+							})}
+						</tbody>
+					</table>
+				</div>
+				<div className="text-center">
+					<button  onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+					<span> 
+						<strong> {pageIndex + 1} </strong>
+					</span>
+					<button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+				</div>
+			</div> 
+		</div>
+	</>
   )
 }
 
