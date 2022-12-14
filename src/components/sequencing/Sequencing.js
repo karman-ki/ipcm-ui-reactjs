@@ -10,6 +10,9 @@ import "react-widgets/styles.css";
 import 'react-toastify/dist/ReactToastify.css';
 import '../table-react/Table.css';
 
+import commonService from "../../services/commonService";
+
+
 const COLUMNS = [
   { Header: "Sequence name", accessor: "sequence_name",Filter: ColumnFilter},
   { Header: "CFDNA", accessor: "cfdna" ,Filter: ColumnFilter},
@@ -22,15 +25,19 @@ const COLUMNS = [
 
 const DATASET = []; 
 
-const fetchDataSet = axios.post("http://localhost:8500/ipcm-api/iPCM/sequence_list?s_id=316&u_id=6")
+const siteId = sessionStorage.getItem('hp_st');
+const uId = sessionStorage.getItem('u_id');
+const params = { "s_id" : siteId, "u_id" :uId};
+
+const fetchDataSet = commonService.sequencedList(params)
 .then(function (response) {
-  var resultSet= response.data.data.length;
-  if (resultSet >= 1){
-	for (let i = 0; i < resultSet; i++) 
-	DATASET.push(response.data.data[i]);
-  }
-  return DATASET;
+	var resultSet= response.data.length;
+	if (resultSet >= 1){
+		for (let i = 0; i < resultSet; i++) 
+		DATASET.push(response.data[i]);
+	}
 });
+
 
 function Sequencing() {
 
@@ -88,9 +95,9 @@ function Sequencing() {
 					<button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
 					<button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
 				</div>
-				<div class="table-body-accessories">
-					<div class="mr-auto p-2">
-						<div class="form-inline">
+				<div className="table-body-accessories">
+					<div className="mr-auto p-2">
+						<div className="form-inline">
 							<label>Show 
 								<select className='input input-border select entries-picker' 
 									value={pageSize}
@@ -105,7 +112,7 @@ function Sequencing() {
 							</label>
 						</div>
 					</div>
-					<div class="p-2">
+					<div className="p-2">
 						<GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 					</div>
 				</div>

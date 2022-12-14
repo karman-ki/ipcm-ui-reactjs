@@ -12,36 +12,43 @@ import ColumnFilter from "../table-react/ColumnFilter";
 import '../table-react/Table.css';
 import "react-widgets/styles.css";
 
-const COLUMNS = [
-	{
-		// Build our expander column
-		id: "expander", // Make sure it has an ID
-		Header: "",
-		disableGlobalFilter: true
-	},
-	{ Header: "PNR", accessor: "pnr",Filter: ColumnFilter},
-	{ Header: "Date", accessor: "datum" ,Filter: ColumnFilter},
-	{ Header: "RID", accessor: "rid",Filter: ColumnFilter},
-	{ Header: "CDK", accessor: "cdk",Filter: ColumnFilter},
-	{ Header: "Blood", accessor: "blood" ,Filter: ColumnFilter},
-	{ Header: "DNA1", accessor: "dna1",Filter: ColumnFilter},
-	{ Header: "DNA2", accessor: "dna2",Filter: ColumnFilter}
-];
+import commonService from "../../services/commonService";
 
-const dataset = []; 
 
-const fetchDataSet= axios.post("http://localhost:8500/ipcm-api/iPCM/referral_list?s_id=316")
-.then(function (response) {
-	var resultSet= response.data.data.length;
-	if (resultSet >= 1){
-		for (let i = 0; i < resultSet; i++) 
-		dataset.push(response.data.data[i]);
-	}
-});
+	const COLUMNS = [
+		{
+			// Build our expander column
+			id: "expander", // Make sure it has an ID
+			Header: "",
+			disableGlobalFilter: true
+		},
+		{ Header: "PNR", accessor: "pnr",Filter: ColumnFilter},
+		{ Header: "Date", accessor: "datum" ,Filter: ColumnFilter},
+		{ Header: "RID", accessor: "rid",Filter: ColumnFilter},
+		{ Header: "CDK", accessor: "cdk",Filter: ColumnFilter},
+		{ Header: "Blood", accessor: "blood" ,Filter: ColumnFilter},
+		{ Header: "DNA1", accessor: "dna1",Filter: ColumnFilter},
+		{ Header: "DNA2", accessor: "dna2",Filter: ColumnFilter}
+	];
 
+	const dataset = []; 
+	const siteId = sessionStorage.getItem('hp_st');
+	const params = { "s_id" : siteId};
+
+	commonService.referralList(params)
+	.then(function (response) {
+		var resultSet= response.data.length;
+		if (resultSet >= 1){
+			for (let i = 0; i < resultSet; i++) 
+			dataset.push(response.data[i]);
+		}
+	});
  
 
-function ReferralDb () { 
+function ReferralDb () {
+
+	console.log("dataset",dataset);
+
 	const columns = useMemo(() => COLUMNS , [])
 	const data = useMemo(() => dataset , [])
 	//setting default sort values
@@ -87,8 +94,10 @@ function ReferralDb () {
 	useExpanded,
 	usePagination)
 
-	const {globalFilter} = state
-	const {pageIndex,pageSize} = state
+	const {globalFilter} = state ;
+	const {pageIndex,pageSize} = state ;
+
+	console.log("data",data);
 	
 	return (
 		<>
@@ -99,9 +108,9 @@ function ReferralDb () {
 						<button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>
 						<button className='input-border action-buttons info-button' ><GrRefresh className="button-icon" />Refresh</button>
 					</div>
-					<div class="table-body-accessories">
-						<div class="mr-auto p-2">
-							<div class="form-inline">
+					<div className="table-body-accessories">
+						<div className="mr-auto p-2">
+							<div className="form-inline">
 								<label>Show 
 									<select className='input input-border select entries-picker' 
 										value={pageSize}
@@ -116,7 +125,7 @@ function ReferralDb () {
 								</label>
 							</div>
 						</div>
-						<div class="p-2">
+						<div className="p-2">
 							<GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 						</div>
 					</div>
