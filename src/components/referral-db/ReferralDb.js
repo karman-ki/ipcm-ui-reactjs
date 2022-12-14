@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useMemo } from "react";
+import React, {useMemo } from "react";
 import { useTable, useFilters, useGlobalFilter, useSortBy, useExpanded, usePagination} from "react-table";
 import axios from "axios";
 import './Table.css';
@@ -7,8 +7,6 @@ import GlobalFilter from "./GlobalFilter";
 import ColumnFilter from "./ColumnFilter";
 import { GrRefresh } from "react-icons/gr";
 import { RiDatabase2Fill } from "react-icons/ri";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 const COLUMNS = [

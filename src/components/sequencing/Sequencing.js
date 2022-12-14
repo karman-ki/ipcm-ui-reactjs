@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useMemo } from "react";
+import React, {useMemo } from "react";
 import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination} from "react-table";
 import axios from "axios";
 import './Table.css';
@@ -8,6 +8,7 @@ import GlobalFilter from "./GlobalFilter";
 import { GrRefresh } from "react-icons/gr";
 import { FiUpload } from "react-icons/fi"; 
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate, Navigate } from "react-router-dom";
 
 
 const COLUMNS = [
@@ -29,12 +30,20 @@ const fetchDataSet = axios.post("http://localhost:8500/ipcm-api/iPCM/sequence_li
     for (let i = 0; i < resultSet; i++) 
     DATASET.push(response.data.data[i]);
   }
+  return DATASET;
 });
 
 function Sequencing() {
 
+  const isAuthenticated = sessionStorage.getItem("authenticated");
+
+	if (isAuthenticated) {
+		return <Navigate to="/" />
+	}
+
+
   const columns = useMemo(() => COLUMNS , [])
-  const data = useMemo(() => DATASET , [])
+  const data = useMemo(() => fetchDataSet , [])
   //setting default sort values
   const sortees = React.useMemo(
     () => [

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Table, InitSort } from "../table/Table";
 import tableData from "../../data/inclusion_data.json";
 import { SortData } from "../table/UpdateData";
-
+import { useNavigate, Navigate } from "react-router-dom";
 
 const columns = [
   { label: "Study ID", accessor: "study_id", sortable: true, searchable: false },
@@ -11,8 +11,13 @@ const columns = [
   { label: "Processing status", accessor: "processing_status", sortable: false, searchable: false }
 ];
 
-
 export default function Dashboard() {
+
+  const isAuthenticated = sessionStorage.getItem("authenticated");
+
+  if (!isAuthenticated) {
+		return <Navigate to="/login" />
+	}
 
   var [initSortField, initSortOrder] = InitSort(columns);
 

@@ -1,13 +1,16 @@
-import { NavLink } from "react-router-dom";
 import React, { useState } from 'react'
-import BrandLogo from '../../assets/images/logo/logo.png'
+import { useNavigate, NavLink } from "react-router-dom";
+
 import { BsPersonSquare } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FiLogIn } from "react-icons/fi";
 
+import BrandLogo from '../../assets/images/logo/logo.png';
 
 function Header() {
 
     const [isOpen, setOpen] = useState(false);
+    const user_name = sessionStorage.getItem("name");
 
     const ToggleSidebar = () => {
 
@@ -36,6 +39,14 @@ function Header() {
         }
     }
 
+    const navigate = useNavigate();
+
+    const logout = () => {
+        sessionStorage.removeItem('authenticated');
+        sessionStorage.clear();
+        navigate("/login");
+    }
+
     return (
         <>
             <div id="header">
@@ -49,11 +60,16 @@ function Header() {
                     </div>
                 </div>
                 <div id="header-logged-in">
-                    Logged in as
-                    <NavLink to="/profile" className={({ isActive }) => (isActive ? "profile-link active" : 'profile-link')}>
+                    <div onClick={logout} className="logout-btn">
+                        <span className='mr-2'>
+                            {user_name}
+                        </span>
+                        <FiLogIn  size={25} ></FiLogIn>
+                    </div>
+                    {/* <NavLink to="/profile" className={({ isActive }) => (isActive ? "profile-link active" : 'profile-link')}>
                         <BsPersonSquare />
-                        <span>Kalle Kalleson</span>
-                    </NavLink>
+                        <span>{user_name}</span>
+                    </NavLink> */}
                 </div>
             </div>
         </>

@@ -193,6 +193,13 @@ h5 {
 	align-items: baseline;
 }
 
+.logout-btn {
+	cursor: pointer;
+	border-bottom: solid var(--navbar-text-color) 1px;
+	padding: 4px;
+	color: var(--navbar-text-color);
+}
+
 .profile-link {
 	border-bottom: solid var(--navbar-text-color) 1px;
 	margin-left: 10px;
