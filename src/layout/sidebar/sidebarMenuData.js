@@ -44,7 +44,7 @@ const sidebarMenuData = [
     {
         "title": "Sequenced",
         "icon": <TbDna2 className="nav-img"/>,
-        "path": "/Sequencing",
+        "path": "/sequencing",
         "parent": true,
         
     },

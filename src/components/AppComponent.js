@@ -16,20 +16,20 @@ const AppComponent = () => {
 	}
 
   return (
-    <>
-      <div id='page-container'>
-        <div id='wrapper'>
-          <Header />
-            <div id='content-wrapper'>
-              <Sidebar />
-              <div id='content'>
-                <Outlet />
-              </div>
-            </div>
-            <Footer />
-        </div>
-      </div>
-    </>
+	<>
+	  <div id='page-container'>
+		<div id='wrapper'>
+			<Header />
+			<div id='content-wrapper'>
+			  <Sidebar />
+			  <div id='content'>
+				<Outlet />
+			  </div>
+			</div>
+			<Footer />
+		</div>
+	  </div>
+	</>
   );
 }
 
