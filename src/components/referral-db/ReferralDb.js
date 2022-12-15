@@ -25,9 +25,9 @@ const COLUMNS = [
   { Header: "DNA2", accessor: "dna2",Filter: ColumnFilter}
 ];
 
-const dataset = []; 
+const dataset = [];
 
-const fetchDataSet= axios.post("http://localhost:8500/ipcm-api/iPCM/referral_list?s_id=316")
+ axios.post("http://localhost:8500/ipcm-api/iPCM/referral_list?s_id=316")
 .then(function (response) {
   var resultSet= response.data.data.length;
   if (resultSet >= 1){

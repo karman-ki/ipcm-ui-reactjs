@@ -12,13 +12,13 @@ class AuthService {
     }
 
     async userRegisteration(params){
-        const response = await axios.post(API_URL + 'user_register', params);
-        return response.data
+        const response = await axios.post(API_URL + 'register', params);
+        return response.data;
     }
 
     async loginValidation(params){
         const response = await axios.post(API_URL + 'login', params);
-        return response.data
+        return response.data;
     }
     
 

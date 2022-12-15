@@ -12,12 +12,26 @@ import BrandLogo from '../../assets/images/logo/logo.png';
 import AuthService from "../../services/authService";
 
 
+
+const siteInfo = [];	
+siteInfo.push(<option key={""} value={""}>{"-- Select option --"}</option>);
+
+	AuthService.siteList().then(
+		(data) =>{
+			const resultSet=data['data'];				
+			for (let i = 0; i < resultSet.length; i++)  {								
+				siteInfo.push(<option key={resultSet[i].site_id} value={resultSet[i].site_id}>{resultSet[i].site_name}</option>);	
+			}
+		}
+	) 
+	
 function Register() {
 
 	const navigate = useNavigate();
 	const [authenticated, setauthenticated] = useState(false);
-	
-	const validationSchema = Yup.object().shape({
+
+	//Field validation using Yup hook
+		const validationSchema = Yup.object().shape({
 		emailID: Yup.string()
 			.required('Email is required')
 			.email('Email is invalid'),
@@ -29,44 +43,77 @@ function Register() {
 			.matches(/^(?=.*[A-Z])/, 'Must contain at least one uppercase character')
 			.matches(/^(?=.*[0-9])/, 'Must contain at least one number')
 			.matches(/^(?=.*[!@#%&])/, 'Must contain at least one special character'),
-	});
+		firstname: Yup.string()
+			.min(6, 'Too Short!')
+			.max(50, 'Too Long!')
+			.required('First Name is required'),
+		lastname: Yup.string()
+			.min(6, 'Too Short!')
+			.max(50, 'Too Long!')
+			.required('Last Name is required'),
+		confirmpassword: Yup.string()
+			.required('Please retype your password.')
+			.oneOf([Yup.ref('password')], 'Your passwords do not match.'),
+		role: Yup.string()
+			.required('Role is required'),
+		site: Yup.string()
+			.required('Site is Required')
+		});
+	
 
 	const isAuthenticated = sessionStorage.getItem("authenticated");
 
 	if (isAuthenticated) {
-		return <Navigate to="/" />
+		return <Navigate to="/Login" />
 	}
 
 	const initialValues = {
 		emailID: '',
 		password: '',
-	  };
-
-	const handleSubmit = (data) => {
+		firstname: '',
+		lastname: '',
+		confirmpassword: '',
+		role:'',
+		site:'',
+	  };		
+	  
+	 const handleSubmit = (data) => {
 		let params = {};
+		const siteName=data["site"]
 		params["email_id"] = data["emailID"];
 		params["pwd"] = data["password"];
-
-		AuthService.loginValidation(params).then(
-			(data) => {
-				const res_data = data['data'];
-				if(res_data.length > 0){
-					setauthenticated(true)
+		params["first_name"] = data["firstname"];
+		params["last_name"] = data["lastname"];
+		params["role"]= data["role"];
+		params["site"]= data["site"];
+		
+		
+		AuthService.userRegisteration(params).then(
+			(response) => {
+				if(response['status']){
+					const msg = response['message'];
+					toast.success(msg, {
+						position: toast.POSITION.TOP_RIGHT
+					});
+					navigate("/login");							
 				}else{
-					const msg = data['message'];
+					const msg = response['message'];
 					toast.error(msg, {
 						position: toast.POSITION.TOP_RIGHT
 					});
 				}
-			},(error) =>{
+			},(error) => {
 				toast.error(error, {
 					position: toast.POSITION.TOP_RIGHT
 				});
+			
+			
+			})			
 			}
-		)
-	}
+			console.log("SiteInformation",siteInfo)
 
     return (
+		<>
         <div className="container-login100">
 			<div className="row wrap-login100">
 				<div className="col-7">
@@ -81,28 +128,58 @@ function Register() {
 						>
 						{({ errors, touched, resetForm }) => (
 							<Form className="login100-form validate-form" id="signupForm">
-								<h4 className="login100-form-title font-weight-bold">Create New Account</h4>
+								<h4 className="login100-form-title font-weight-bold">Register a new account</h4>
+								<div className="form-group">
+									<label htmlFor="firstname" className="mandatory"> First Name </label>
+									<Field name="firstname" type="firstname" className={ 'form-control' + (errors.firstname && touched.firstname ? ' is-invalid' : '') }/>
+									<ErrorMessage name="firstname" component="div" className="invalid-feedback" />
+								</div>
+								<div className="form-group">
+									<label htmlFor="lastname" className="mandatory"> Last Name </label>
+									<Field name="lastname" type="lastname" className={ 'form-control' + (errors.lastname && touched.lastname ? ' is-invalid' : '') }/>
+									<ErrorMessage name="lastname" component="div" className="invalid-feedback" />
+								</div>
 								<div className="form-group">
 									<label htmlFor="emailID" className="mandatory"> Email </label>
 									<Field name="emailID" type="email" className={ 'form-control' + (errors.emailID && touched.emailID ? ' is-invalid' : '') }/>
 									<ErrorMessage name="emailID" component="div" className="invalid-feedback" />
 								</div>
-								<div className="form-group pt-3">
-									<label htmlFor="password" className="mandatory"> Password 
-										<a href="/forgot-password" className="float-right disabled">
-											Forgot Password?
-										</a>
-									</label>
-									<Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
+								<div className="form-group">
+								<label htmlFor="role" className="mandatory">Role</label>
+								<Field as="select" name="role" type="role" className={ 'form-control' + (errors.role && touched.role ? ' is-invalid' : '') }>
+								<option value="">-- Select option --</option>
+								<option value="Pathologist">Pathologist</option>
+								<option value="Doctor">Doctor</option>
+								<option value="Nurse">Nurse</option>
+								</Field>
+								<ErrorMessage name="role" component="div" className="invalid-feedback" />																																							
+								</div>
+									
+								<div className="form-group">
+								<label htmlFor="site" className="mandatory">Site</label>
+								<Field as="select" name="site" type="site" className={ 'form-control' + (errors.site && touched.site ? ' is-invalid' : '') }>
+									{siteInfo}													
+								</Field>
+								<ErrorMessage name="site" component="div" className="invalid-feedback" />
+								</div>
+								
+								<div className="form-group">
+									<label htmlFor="password" className="mandatory"> Password </label>
+									<Field name="password" type="password" className={ 'form-control' + (errors.password && touched.password ? ' is-invalid' : '') }/>
 									<ErrorMessage name="password" component="div" className="invalid-feedback" />
+								</div>
+								<div className="form-group">
+									<label htmlFor="confirmpassword" className="mandatory"> Confirm Password </label>
+									<Field name="confirmpassword" type="password" className={ 'form-control' + (errors.confirmpassword && touched.confirmpassword ? ' is-invalid' : '') }/>
+									<ErrorMessage name="confirmpassword" component="div" className="invalid-feedback" />
 								</div>
 								<div className="form-group pt-3">
 									<button type="submit" className="btn btn-primary" id="signIn">
-										Login
+										Register
 									</button>
 								</div>
 								<div className="form-group">
-								Already have an account? <a href="/login" className="link-primary auth-link"> Sign In </a>
+								Already have an account? <a href="/login" className="link-primary auth-link"> Log In </a>
 								</div>
 							</Form>
 						)}
@@ -111,19 +188,20 @@ function Register() {
 				<div className=" col-12 footer">
 					<strong>iPCM Leaderboard</strong> &copy;2022, All rights reserved.
 				</div>
-			</div>
-			<ToastContainer
-				position="top-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-			/>
-        </div>
+			</div>	
+    	</div>
+	<ToastContainer
+		position="top-right"
+		autoClose={5000}
+		hideProgressBar={false}
+		newestOnTop={false}
+		closeOnClick
+		pauseOnFocusLoss
+		draggable
+		pauseOnHover
+		theme="light"
+	/>
+	</>
     );
 }
 
