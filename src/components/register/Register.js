@@ -44,11 +44,11 @@ function Register() {
 			.matches(/^(?=.*[0-9])/, 'Must contain at least one number')
 			.matches(/^(?=.*[!@#%&])/, 'Must contain at least one special character'),
 		firstname: Yup.string()
-			.min(6, 'Too Short!')
+			.min(4, 'Too Short!')
 			.max(50, 'Too Long!')
 			.required('First Name is required'),
 		lastname: Yup.string()
-			.min(6, 'Too Short!')
+			.min(4, 'Too Short!')
 			.max(50, 'Too Long!')
 			.required('Last Name is required'),
 		confirmpassword: Yup.string()
@@ -57,7 +57,9 @@ function Register() {
 		role: Yup.string()
 			.required('Role is required'),
 		site: Yup.string()
-			.required('Site is Required')
+			.required('Site is Required'),
+		acceptTerms: Yup.bool().oneOf([true], 'Accept Terms & Conditions is required'),
+			
 		});
 	
 
@@ -75,6 +77,7 @@ function Register() {
 		confirmpassword: '',
 		role:'',
 		site:'',
+		acceptTerms: false,
 	  };		
 	  
 	 const handleSubmit = (data) => {
@@ -110,7 +113,7 @@ function Register() {
 			
 			})			
 			}
-			console.log("SiteInformation",siteInfo)
+			
 
     return (
 		<>
@@ -129,16 +132,18 @@ function Register() {
 						{({ errors, touched, resetForm }) => (
 							<Form className="login100-form validate-form" id="signupForm">
 								<h4 className="login100-form-title font-weight-bold">Register a new account</h4>
-								<div className="form-group">
-									<label htmlFor="firstname" className="mandatory"> First Name </label>
-									<Field name="firstname" type="firstname" className={ 'form-control' + (errors.firstname && touched.firstname ? ' is-invalid' : '') }/>
-									<ErrorMessage name="firstname" component="div" className="invalid-feedback" />
-								</div>
-								<div className="form-group">
-									<label htmlFor="lastname" className="mandatory"> Last Name </label>
-									<Field name="lastname" type="lastname" className={ 'form-control' + (errors.lastname && touched.lastname ? ' is-invalid' : '') }/>
-									<ErrorMessage name="lastname" component="div" className="invalid-feedback" />
-								</div>
+								<div class="form-row">
+									<div class="form-group col-6">
+											<label htmlFor="firstname" className="mandatory"> First Name </label>
+											<Field name="firstname" type="firstname" className={ 'form-control' + (errors.firstname && touched.firstname ? ' is-invalid' : '') }/>
+											<ErrorMessage name="firstname" component="div" className="invalid-feedback" />
+									</div>
+									<div class="form-group col-6">
+											<label htmlFor="lastname" className="mandatory"> Last Name </label>
+											<Field name="lastname" type="lastname" className={ 'form-control' + (errors.lastname && touched.lastname ? ' is-invalid' : '') }/>
+											<ErrorMessage name="lastname" component="div" className="invalid-feedback" />
+									</div>
+								</div>	
 								<div className="form-group">
 									<label htmlFor="emailID" className="mandatory"> Email </label>
 									<Field name="emailID" type="email" className={ 'form-control' + (errors.emailID && touched.emailID ? ' is-invalid' : '') }/>
@@ -172,6 +177,13 @@ function Register() {
 									<label htmlFor="confirmpassword" className="mandatory"> Confirm Password </label>
 									<Field name="confirmpassword" type="password" className={ 'form-control' + (errors.confirmpassword && touched.confirmpassword ? ' is-invalid' : '') }/>
 									<ErrorMessage name="confirmpassword" component="div" className="invalid-feedback" />
+								</div>
+								<div class="form-group">
+									<div className="custom-checkbox custom-control">
+										<Field type="checkbox" name="acceptTerms" className={'form-check-input ' + (errors.acceptTerms && touched.acceptTerms ? ' is-invalid' : '')} />
+										<label htmlFor="acceptTerms" className="form-check-label">I agree to the <a href="termsandconditions.html">Terms and Conditions </a></label>
+										<ErrorMessage name="acceptTerms" component="div" className="invalid-feedback" />
+									</div>
 								</div>
 								<div className="form-group pt-3">
 									<button type="submit" className="btn btn-primary" id="signIn">
