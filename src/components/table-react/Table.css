@@ -58,3 +58,7 @@ table th {
 	display: flex;
 	justify-content: space-between;
 }
+
+.data-delivered {
+    color: #3c8dbc;
+}
