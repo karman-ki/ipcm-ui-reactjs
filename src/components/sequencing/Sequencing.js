@@ -20,7 +20,7 @@ const COLUMNS = [
   { Header: "Study ID", accessor: "sd_id",Filter: ColumnFilter},
   { Header: "Site name", accessor: "site_name" ,Filter: ColumnFilter},
   { Header: "Created on", accessor: "created_on",Filter: ColumnFilter},
-  { Header: "Status", accessor: "seq_status",Filter: ColumnFilter}
+  { Header: "Status", accessor: "status",Filter: ColumnFilter}
 ];
 
 const DATASET = []; 
@@ -152,7 +152,11 @@ function Sequencing() {
 								return (
 								<tr {...row.getRowProps()}>
 									{row.cells.map(cell => {
-									return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+									return (cell.column.Header === 'Status') 
+									? <td {...cell.getCellProps()}>{
+										<span class={cell.value.toString().toLowerCase()} style={{ fontWeight: 'bold' }}>{cell.render("Cell")}</span>
+									}</td>
+									: <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
 									})}
 								</tr>
 								)
