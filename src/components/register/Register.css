@@ -1,106 +1,82 @@
-.my-register-page {
-	margin: 40px auto 40px;
-}
 
-.my-register-page .brand {
-	text-align: center;
-	margin-bottom: 20px;
-} 
-	
-.my-register-page .brand  h3 .img-sync {
-	width: 60px;
-	height: 60px;
-	margin-right: 8px;
-}
-	
-.my-register-page .brand h3 span b{
-	color: #323C6B;
-}
-	
-.my-register-page .brand  h3 span small {
-	font-size: large;
-	color: #EF6C57;
-	font-weight: bolder;
-}
-	
-.my-register-page .card-wrapper {
-	width: 500px;
-}
-	
-.my-register-page .card {
-	border-color: transparent;
-	box-shadow: 0 4px 8px rgba(0,0,0,.05);
-}
-	
-.my-register-page .card.fat {
-	padding: 0px 10px;
-}
-	
-.my-register-page .card .card-title {
-	margin-top: 5px;
-}
 
-.my-register-page .form-group {
-	margin-bottom : 0.5rem;
-}
-
-.my-register-page .form-group label {
+.container-register100 {
+	font-family: 'Roboto Slab', serif;
 	width: 100%;
-	font-weight: bold;
+	min-height: 100vh;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	background: #F2F2F2;
+	background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+	background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+	background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
-.my-register-page .form-group label.mandatory:after {
-    color: #e32;
-    content: ' *';
-    display:inline;
-  }
-
-.my-register-page .btn.btn-block {
-	padding: 12px 10px;
+.wrap-register100 {
+	width: 950px;
+	background: #ffffff;
+	border-radius: 10px;
+	overflow: hidden;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 25px;
 }
 
-.my-register-page .footer {
-	margin: 40px 0;
+
+.wrap-register100 .footer {
+	margin-top: 10px;
 	color: #888;
 	text-align: center;
 }
 
-a.disabled {
-	color: gray;
-	pointer-events: none;
-}
-
-.auth-link{
-	cursor: pointer;
-}
-
-.is-invalid {
-    border: 1px solid red;
-	border-radius: 0.375rem;
-}
-
-.invalid-feedback {
-	display: block;
+.register-app-title {
+	font-size: 20px;
+	font-weight: bold;
+	color: #333;
 	width: 100%;
-    margin-top: 0.25rem;
-    font-size: .875em;
-    color: #dc3545;
+	padding: 10px 0px 0px 0px;
 }
 
-@media screen and (max-width: 425px) {
-	.my-register-page .card-wrapper {
-		width: 90%;
-		margin: 0 auto;
-	}
+.register100-pic{
+	width: 110%;
 }
 
-@media screen and (max-width: 320px) {
-	.my-register-page .card.fat {
-		padding: 0;
-	}
-
-	.my-register-page .card.fat .card-body {
-		padding: 15px;
-	}
+.register100-form {
+	width: 380px
 }
-	
+
+.register100-form-title {
+	/* font-size: 20px; */
+	color: #333;
+	line-height: 1.2;
+	text-align: center;
+	width: 100%;
+	display: block;
+	padding-bottom: 10px;
+}
+
+
+.register100-form .form-group label {
+	width: 100%;
+	font-weight: bold;
+	font-family: 'Roboto Slab', serif;
+	font-size: 14px;
+}
+
+.register100-form .form-group label.mandatory:after {
+    color: #e32;
+    content: ' *';
+    display:inline;
+}
