@@ -1,21 +1,15 @@
 import React, {useMemo } from "react";
 import { useTable, useFilters, useGlobalFilter, useSortBy, useExpanded, usePagination} from "react-table";
-
 import { GrRefresh } from "react-icons/gr";
 import { RiDatabase2Fill } from "react-icons/ri";
-
-import axios from "axios";
-
 import GlobalFilter from "../table-react/GlobalFilter";
 import ColumnFilter from "../table-react/ColumnFilter";
-
 import '../table-react/Table.css';
 import "react-widgets/styles.css";
-
 import commonService from "../../services/commonService";
 
 
-	const COLUMNS = [
+	const column_arr = [
 		{
 			// Build our expander column
 			id: "expander", // Make sure it has an ID
@@ -47,9 +41,7 @@ import commonService from "../../services/commonService";
 
 function ReferralDb () {
 
-	console.log("dataset",dataset);
-
-	const columns = useMemo(() => COLUMNS , [])
+	const columns = useMemo(() => column_arr , [])
 	const data = useMemo(() => dataset , [])
 	//setting default sort values
 	const sortees = React.useMemo(
@@ -80,25 +72,24 @@ function ReferralDb () {
 		state,
 		setGlobalFilter
 	} = useTable({
-		columns : COLUMNS,
-		data : dataset,
+		columns : columns,
+		data : data,
 		initialState:{ 
-		sortBy: sortees,
-		pageSize:10,
-		//hiddenColumns: ['expander'],
-		 }
-	},
-	useFilters,
-	useGlobalFilter,
-	useSortBy,
-	useExpanded,
-	usePagination)
+			sortBy: sortees,
+			pageSize:10,
+			//hiddenColumns: ['expander'],
+		}
+		},
+		useFilters,
+		useGlobalFilter,
+		useSortBy,
+		useExpanded,
+		usePagination
+	)
 
 	const {globalFilter} = state ;
 	const {pageIndex,pageSize} = state ;
 
-	console.log("data",data);
-	
 	return (
 		<>
 			<div className="container-fluid">

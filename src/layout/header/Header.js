@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { BsPersonSquare } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiLogIn } from "react-icons/fi";
 

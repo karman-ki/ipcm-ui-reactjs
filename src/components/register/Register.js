@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, Navigate } from "react-router-dom";
@@ -28,7 +28,6 @@ siteInfo.push(<option key={""} value={""}>{"-- Select option --"}</option>);
 function Register() {
 
 	const navigate = useNavigate();
-	const [authenticated, setauthenticated] = useState(false);
 
 	//Field validation using Yup hook
 		const validationSchema = Yup.object().shape({
@@ -82,7 +81,7 @@ function Register() {
 	  
 	 const handleSubmit = (data) => {
 		let params = {};
-		const siteName=data["site"]
+		// const siteName=data["site"]
 		params["email_id"] = data["emailID"];
 		params["pwd"] = data["password"];
 		params["first_name"] = data["firstname"];
@@ -119,7 +118,7 @@ function Register() {
         <div className="container-register100">
 			<div className="row wrap-register100">
 				<div className="col-5 pt-5">
-					<img className="register100-pic" src={BrandLogo}></img>
+					<img className="register100-pic" src={BrandLogo} alt="iPCM logo"/>
                     <h2 className="register-app-title"> iPCM leaderboard</h2>
 					<div className="form-group text-left pt-1">
 						Already have an account? <a href="/login" className="link-primary auth-link"> LogIn </a>

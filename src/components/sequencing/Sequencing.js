@@ -1,8 +1,7 @@
-import React, {useMemo } from "react";
+import React, {useState, useEffect } from "react";
 import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination} from "react-table";
 import { GrRefresh } from "react-icons/gr";
 import { FiUpload } from "react-icons/fi"; 
-import axios from "axios";
 import ColumnFilter from "../table-react/ColumnFilter";
 import GlobalFilter from "../table-react/GlobalFilter";
 
@@ -13,77 +12,89 @@ import '../table-react/Table.css';
 import commonService from "../../services/commonService";
 
 
-const COLUMNS = [
-  { Header: "Sequence name", accessor: "sequence_name",Filter: ColumnFilter},
-  { Header: "CFDNA", accessor: "cfdna" ,Filter: ColumnFilter},
-  { Header: "RID", accessor: "rid",Filter: ColumnFilter},
-  { Header: "Study ID", accessor: "sd_id",Filter: ColumnFilter},
-  { Header: "Site name", accessor: "site_name" ,Filter: ColumnFilter},
-  { Header: "Created on", accessor: "created_on",Filter: ColumnFilter},
-  { Header: "Status", accessor: "status",Filter: ColumnFilter}
-];
-
-const DATASET = []; 
-
-const siteId = sessionStorage.getItem('hp_st');
-const uId = sessionStorage.getItem('u_id');
-const params = { "s_id" : siteId, "u_id" :uId};
-
-const fetchDataSet = commonService.sequencedList(params)
-.then(function (response) {
-	var resultSet= response.data.length;
-	if (resultSet >= 1){
-		for (let i = 0; i < resultSet; i++) 
-		DATASET.push(response.data[i]);
-	}
-});
-
-
 function Sequencing() {
 
-  const columns = useMemo(() => COLUMNS , [])
-  const data = useMemo(() => fetchDataSet , [])
-  //setting default sort values
-  const sortees = React.useMemo(
-	() => [
-	  { 
-		id: 'sd_id',
-		desc: true
-	  },     
-	  { 
-		id: 'rid',
-		desc: true
-	  },
-	  ],
-	[]
-  );
+	const [seqData, setSeqData] = useState([]);
+	const [headerColumn, setHeaderCol] = useState([]);
 
-  const {
-	getTableProps,
-	getTableBodyProps,
-	headerGroups,
-	page,
-	nextPage,
-	previousPage,
-	canNextPage,
-	canPreviousPage,
-	setPageSize,
-	prepareRow,
-	state,
-	setGlobalFilter,
-  } = useTable({
-	columns : COLUMNS,
-	data : DATASET,
-	initialState:{ sortBy: sortees }
-  },
-  useFilters,
-  useGlobalFilter,
-  useSortBy,
-  usePagination)
+	useEffect(() => {
 
-  const {globalFilter} = state
-  const {pageIndex,pageSize} = state
+		const siteId = sessionStorage.getItem('hp_st');
+		const uId = sessionStorage.getItem('u_id');
+		const params = { "s_id" : siteId, "u_id" :uId};
 
+		commonService.sequencedList(params)
+		.then(function (response) {
+			const jsonData= response.data;
+			const dataset = [];
+			console.log(response, jsonData)
+			if (jsonData.length > 0){
+				jsonData.forEach(function (value) {
+					dataset.push(value);
+				}); 
+			}
+			setSeqData(dataset);
+		});
+
+		const columnList = [
+			{ Header: "Sequence name", accessor: "sequence_name",Filter: ColumnFilter},
+			{ Header: "CFDNA", accessor: "cfdna" ,Filter: ColumnFilter},
+			{ Header: "RID", accessor: "rid",Filter: ColumnFilter},
+			{ Header: "Study ID", accessor: "sd_id",Filter: ColumnFilter},
+			{ Header: "Site name", accessor: "site_name" ,Filter: ColumnFilter},
+			{ Header: "Created on", accessor: "created_on",Filter: ColumnFilter},
+			{ Header: "Status", accessor: "status",Filter: ColumnFilter}
+		];
+
+		setHeaderCol(columnList);
+	},[]);
+
+
+	console.log("seqData", seqData)
+	// const columns = useMemo(() => column_arr , [])
+	// const data = useMemo(() => seqData , [])
+
+	//setting default sort values
+	const sortees = React.useMemo(
+		() => [
+			{ 
+				id: 'sd_id',
+				desc: true
+			},     
+			{ 
+				id: 'rid',
+				desc: true
+			},
+			],
+		[]
+	);
+
+	const {
+		getTableProps,
+		getTableBodyProps,
+		headerGroups,
+		page,
+		nextPage,
+		previousPage,
+		canNextPage,
+		canPreviousPage,
+		setPageSize,
+		prepareRow,
+		state,
+		setGlobalFilter,
+	} = useTable({
+			columns : headerColumn,
+			data : seqData,
+			initialState:{ sortBy: sortees }
+		},
+		useFilters,
+		useGlobalFilter,
+		useSortBy,
+		usePagination
+	)
+
+	const {globalFilter} = state
+	const {pageIndex,pageSize} = state
 	
 
   return (
@@ -154,7 +165,7 @@ function Sequencing() {
 									{row.cells.map(cell => {
 									return (cell.column.Header === 'Status') 
 									? <td {...cell.getCellProps()}>{
-										<span class={cell.value.toString().toLowerCase()} style={{ fontWeight: 'bold' }}>{cell.render("Cell")}</span>
+										<span className={cell.value.toString().toLowerCase()} style={{ fontWeight: 'bold' }}>{cell.render("Cell")}</span>
 									}</td>
 									: <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
 									})}

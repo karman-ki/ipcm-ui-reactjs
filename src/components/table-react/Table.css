@@ -59,6 +59,36 @@ table th {
 	justify-content: space-between;
 }
 
+/* Status color*/
+
+.inclusion{
+    color:orangered;
+}
+
+.biobank, .ongoing {
+    color: #007bff;
+}
+.sequencing {
+    color: #d81b60;
+}
+
 .data-delivered {
     color: #3c8dbc;
+}
+
+.analysis {
+    color: #6610f2;
+}
+
+
+.curation {
+    color: #28a745;
+}
+
+.report {
+    color: #ea1212;
+}
+
+.pending {
+    color: yellow;
 }

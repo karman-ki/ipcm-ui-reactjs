@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, Navigate } from "react-router-dom";
@@ -15,7 +15,7 @@ import AuthService from "../../services/authService";
 function Login() {
 
 	const navigate = useNavigate();
-	const [authenticated, setauthenticated] = useState(false);
+	const [authenticate, setauthenticated] = useState(false);
 	
 	const validationSchema = Yup.object().shape({
 		emailID: Yup.string()
@@ -30,12 +30,6 @@ function Login() {
 			.matches(/^(?=.*[0-9])/, 'Must contain at least one number')
 			.matches(/^(?=.*[!@#%&])/, 'Must contain at least one special character'),
 	});
-
-	const isAuthenticated = sessionStorage.getItem("authenticated");
-
-	if (isAuthenticated) {
-		return <Navigate to="/" />
-	}
 
 	const initialValues = {
 		emailID: '',
@@ -56,7 +50,7 @@ function Login() {
 					const full_name = res_data[0]['first_name'] + ' ' + res_data[0]['last_name'];
 					const hp_st = res_data[0]['site_id'];
 					const rl_st = res_data[0]['role_id'];
-					sessionStorage.setItem("authenticated", true);
+					sessionStorage.setItem("authenticated", authenticate);
 					sessionStorage.setItem("name", full_name);
 					sessionStorage.setItem("u_id", us_id);
 					sessionStorage.setItem("hp_st", hp_st);
@@ -76,12 +70,21 @@ function Login() {
 		)
 	}
 
+	useEffect(() => {
+	}, [authenticate])
+
+	const isAuthenticated = sessionStorage.getItem("authenticated");
+
+	if (isAuthenticated) {
+		return <Navigate to="/" />
+	}
+
     return (
 		<>
 			<div className="container-login100">
 				<div className="row wrap-login100">
 					<div className="col-7">
-						<img className="login-logo" src={BrandLogo}></img>
+						<img className="login-logo" src={BrandLogo} alt="iPCM logo" />
 						<h2 className="login-app-title"> iPCM leaderboard</h2>
 					</div>
 					<div className="col-5">

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Table, InitSort } from "../table/Table";
 import tableData from "../../data/inclusion_data.json";
 import { SortData } from "../table/UpdateData";
-import { useNavigate, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const columns = [
   { label: "Study ID", accessor: "study_id", sortable: true, searchable: false },
