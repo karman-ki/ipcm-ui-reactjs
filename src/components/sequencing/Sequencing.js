@@ -17,8 +17,8 @@ function Sequencing() {
 	const [seqData, setSeqData] = useState([]);
 	const [headerColumn, setHeaderCol] = useState([]);
 
-	useEffect(() => {
-
+	
+		const sequencedbList = () => {
 		const siteId = sessionStorage.getItem('hp_st');
 		const uId = sessionStorage.getItem('u_id');
 		const params = { "s_id" : siteId, "u_id" :uId};
@@ -27,7 +27,6 @@ function Sequencing() {
 		.then(function (response) {
 			const jsonData= response.data;
 			const dataset = [];
-			console.log(response, jsonData)
 			if (jsonData.length > 0){
 				jsonData.forEach(function (value) {
 					dataset.push(value);
@@ -35,6 +34,11 @@ function Sequencing() {
 			}
 			setSeqData(dataset);
 		});
+	}
+
+		useEffect(() => {
+
+		sequencedbList()
 
 		const columnList = [
 			{ Header: "Sequence name", accessor: "sequence_name",Filter: ColumnFilter},
@@ -49,10 +53,9 @@ function Sequencing() {
 		setHeaderCol(columnList);
 	},[]);
 
-
-	console.log("seqData", seqData)
-	// const columns = useMemo(() => column_arr , [])
-	// const data = useMemo(() => seqData , [])
+	const clickRefersh = () => {
+		sequencedbList()
+	}
 
 	//setting default sort values
 	const sortees = React.useMemo(
@@ -104,7 +107,7 @@ function Sequencing() {
 				<h3>Sequenced</h3>
 				<div className='top-buttons'>
 					<button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
-					<button className='input-border action-buttons info-button'><GrRefresh className="button-icon" />Refresh</button>
+					<button className='input-border action-buttons info-button' onClick={clickRefersh}><GrRefresh className="button-icon" />Refresh</button>
 				</div>
 				<div className="table-body-accessories">
 					<div className="mr-auto p-2">
