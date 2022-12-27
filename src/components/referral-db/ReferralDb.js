@@ -1,82 +1,81 @@
-import React, {useMemo,useEffect,useState} from "react";
+import React, {useState, useEffect } from "react";
 import { useTable, useFilters, useGlobalFilter, useSortBy, useExpanded, usePagination} from "react-table";
-
 import { GrRefresh } from "react-icons/gr";
 import { RiDatabase2Fill } from "react-icons/ri";
-
-
-import { useNavigate, Navigate } from "react-router-dom";
-
-import axios from "axios";
-
 import GlobalFilter from "../table-react/GlobalFilter";
 import ColumnFilter from "../table-react/ColumnFilter";
-
 import '../table-react/Table.css';
 import "react-widgets/styles.css";
-
 import commonService from "../../services/commonService";
 
+import { AiOutlineMinus } from 'react-icons/ai';
+import { AiOutlinePlus } from 'react-icons/ai';
+
 function ReferralDb () {
-	const [refreshKey, setRefreshKey] = useState(0);
-	const navigate = useNavigate();
-	const [refData,setRefData]= useState([]);
-	const [headerColumn, setHeaderCol] = useState([]);
 
-	const siteId = sessionStorage.getItem('hp_st');
-	const params = { "s_id" : siteId};
+	const [RefData, setRefData] = useState([]);
+	const [headerColumn, setHeaderCol] = useState([]);	
+	
+	const referraldbList = () => {
+		const siteId = sessionStorage.getItem('hp_st');
+		const params = { "s_id" : siteId};
+		commonService.referralList(params)
+			.then(function (response) {
+				var jsonData= response.data;
+				const dataset = [];
+				if (jsonData.length > 0){
+					jsonData.forEach(function (value) {
+						dataset.push(value);
+					}); 
+				}				
+				setRefData(dataset);
+		});
 
-	commonService.referralList(params)
-	.then(function (response) {
-		const jsonData= response.data;
-		const dataset = [];
-		if (jsonData.length > 0){
-			jsonData.forEach(function (value) {
-				dataset.push(value);
-			}); 
-		}
-		setRefData(dataset);
-	});
-}
+	}
 
-useEffect(() => {
-	referralList ()
+	useEffect(() => {
 
-	const COLUMNS = [
-		{
-			// Build our expander column
-			id: "expander", // Make sure it has an ID
-			Header: "",
-			disableGlobalFilter: true
-		},
-		{ Header: "PNR", accessor: "pnr",Filter: ColumnFilter},
-		{ Header: "Date", accessor: "datum" ,Filter: ColumnFilter},
-		{ Header: "RID", accessor: "rid",Filter: ColumnFilter},
-		{ Header: "CDK", accessor: "cdk",Filter: ColumnFilter},
-		{ Header: "Blood", accessor: "blood" ,Filter: ColumnFilter},
-		{ Header: "DNA1", accessor: "dna1",Filter: ColumnFilter},
-		{ Header: "DNA2", accessor: "dna2",Filter: ColumnFilter}
-	];
-
-	setHeaderCol(columnList);
-	},[]);
-
-const clickRefresh = () => {
-	curationList()
-}
-
+		referraldbList()
 		
-	commonService.referralList(params)
-	.then(function (response) {
-		var resultSet= response.data.length;
-		if (resultSet >= 1){
-			for (let i = 0; i < resultSet; i++) 
-			dataset.push(response.data[i]);
-		}
-	});
 	
+		const column_arr = [
+			{
+				Header: () => null,
+				id: "expander",
+				width: 30,
+				disableSortBy: true,
+				Cell: ({ row }) => (
+				  <span {...row.getToggleRowExpandedProps()}>
+					{row.isExpanded ? (
+					  <AiOutlineMinus />
+					) : (
+					  <AiOutlinePlus />
+					)}
+				  </span>
+				),
+				disableGlobalFilter: true
+			},
+			{ Header: "PNR", accessor: "pnr",Filter: ColumnFilter},
+			{ Header: "Date", accessor: "datum" ,Filter: ColumnFilter},
+			/*{ Header: "RID", accessor: "rid",Filter: ColumnFilter},*/
+			{ Header: "CDK", accessor: "cdk",Filter: ColumnFilter},
+			{ Header: "Blood", accessor: "blood" ,Filter: ColumnFilter},
+			{ Header: "DNA1", accessor: "dna1",Filter: ColumnFilter},
+			{ Header: "DNA2", accessor: "dna2",Filter: ColumnFilter},
+			{ Header: "DNA3", accessor: "dna3",Filter: ColumnFilter}
 	
- 	//setting default sort values
+		];
+
+	setHeaderCol(column_arr);					
+},[]);
+
+
+	const clickRefersh = () => {
+		referraldbList()
+	}
+
+
+	//setting default sort values
 	const sortees = React.useMemo(
 		() => [
 			{ 
@@ -105,22 +104,24 @@ const clickRefresh = () => {
 		state,
 		setGlobalFilter
 	} = useTable({
-		columns : COLUMNS,
-		data : dataset,
-		initialState:
-		{sortBy: sortees}
-	},
-	useFilters,
-	useGlobalFilter,
-	useSortBy,
-	useExpanded,
-	usePagination)
+		columns : headerColumn,
+		data : RefData,
+		initialState:{ 
+			sortBy: sortees,
+			pageSize:10,
+			// hiddenColumns: ['expander'],
+		}
+		},
+		useFilters,
+		useGlobalFilter,
+		useSortBy,
+		useExpanded,
+		usePagination
+	)
 
 	const {globalFilter} = state ;
 	const {pageIndex,pageSize} = state ;
 
-	console.log("Data",data);
-	
 	return (
 		<>
 			<div className="container-fluid">
@@ -128,7 +129,7 @@ const clickRefresh = () => {
 					<h3>Referral DB from KI Biobank</h3>
 					<div className='top-buttons'>
 						<button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>
-						<button className='input-border action-buttons info-button' onClick={() => setRefreshKey(oldKey => oldKey +1)}><GrRefresh className="button-icon" />Refresh</button>
+						<button className='input-border action-buttons info-button' onClick={clickRefersh}><GrRefresh className="button-icon" />Refresh</button>
 					</div>
 					<div className="table-body-accessories">
 						<div className="mr-auto p-2">
@@ -180,55 +181,65 @@ const clickRefresh = () => {
 									</tr>          
 								))}
 							</thead>
-
-							<tbody {...getTableBodyProps()}>
-							{page.map(row => {
+											
+							{/* <tbody {...getTableBodyProps()}>
+								{page.map(row => {
 									prepareRow(row)
 									return (
-										<React.Fragment>
-										<tr {...row.getRowProps()}>
-											{                              
-												row.cells.map(cell => {
-													return (cell.value === '' || cell.value === 'undefined' || cell.value === undefined )?
-														<td>               
-														<span
-															{...row.getToggleRowExpandedProps({
-																style: {
-																	// We can even use the row.depth property
-																	// and paddingLeft to indicate the depth
-																	// of the row
-																	paddingLeft: `${row.depth * 1}rem`
-																}
-															})}
-														>
-															{row.isExpanded ? "-" : "+"}
-														</span>
-														</td>
-														:
-														<td {...cell.getCellProps()}>               
+									<tr {...row.getRowProps()}>
+										{row.cells.map(cell => {
+										return (cell.column.Header === 'Status') 
+										? <td {...cell.getCellProps()}>{
+											<span className={cell.value.toString().toLowerCase()} style={{ fontWeight: 'bold' }}>{cell.render("Cell")}</span>
+										}</td>
+										: <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+										})}
+									</tr>
+									)
+								})}
+							</tbody> */}
+						
+						<tbody {...getTableBodyProps()}>
+								{page.map((row,i) => {
+										prepareRow(row)
+										return (
+											<React.Fragment key={i+"_ref"}>
+												<tr {...row.getRowProps()}>
+													{row.cells.map((cell) => {
+														return (
+														<td {...cell.getCellProps()}>
 															{cell.render("Cell")}
 														</td>
-												})
-											
-											}
-										</tr>
-										{row.isExpanded ? (
-											<tr className="subTable">
-														{
-															/*renderRowSubComponent({ row })*/
-															<div className="subTableCols">
-															<p><span className="subTableColstxt">DNA 3</span><span> {row.original.dna3}</span></p> 
-															<p><span className="subTableColstxt">Referral Type</span><span> {row.original.referral_name}</span></p> 
-															<p><span className="subTableColstxt">Hospital Name</span><span> {row.original.site_name}</span> </p>
-															</div>
-															/*Referral Type "+row.original.referral_name + "\n\t Hospital Name "+row.original.site_name*/
-														}
-											</tr>
-										) : null}
-										</React.Fragment>
+														);
+													})}
+												</tr>
+											{row.isExpanded ? (
+												<tr className="subTable">
+													<td colSpan={8}>
+															{	
+																<div className="flex-container">
+																	<div>
+																		<b>RID : </b>
+																		<span> {row.original.rid}</span>
+																	</div>
+                               										<div>
+																		<b>Referral Type : </b>
+																		<span> {row.original.referral_name}</span>
+																	</div>
+                            										<div>
+																		<b>Hospital Name : </b>
+																		<span> {row.original.site_name}</span>
+																	</div>
+
+																</div>
+															}
+													</td>
+												</tr>
+											) : null}
+											</React.Fragment>
 										)
 								})}
-							</tbody> 
+							</tbody>
 					
 						</table>
 					</div>
@@ -245,5 +256,5 @@ const clickRefresh = () => {
 			</div>
 		</>
 	)
-							}
+}
 export default ReferralDb;
