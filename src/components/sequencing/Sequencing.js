@@ -53,7 +53,7 @@ function Sequencing() {
 		setHeaderCol(columnList);
 	},[]);
 
-	const clickRefersh = () => {
+	const clickRefresh = () => {
 		sequencedbList()
 	}
 
@@ -107,7 +107,7 @@ function Sequencing() {
 				<h3>Sequenced</h3>
 				<div className='top-buttons'>
 					<button className='input-border action-buttons edit-button'><FiUpload className="button-icon" /> orderform</button>
-					<button className='input-border action-buttons info-button' onClick={clickRefersh}><GrRefresh className="button-icon" />Refresh</button>
+					<button className='input-border action-buttons info-button' onClick={clickRefresh}><GrRefresh className="button-icon" />Refresh</button>
 				</div>
 				<div className="table-body-accessories">
 					<div className="mr-auto p-2">

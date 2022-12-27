@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, Navigate } from "react-router-dom";
@@ -77,7 +77,21 @@ function Register() {
 		role:'',
 		site:'',
 		acceptTerms: false,
-	  };		
+	  };
+
+	  const [showSite, setShowSite] = useState(false);
+	  const [roleVal, setRoleVal] = useState('');
+	  
+	  const handleChange = (event) => {
+		const value = event.target.value;
+		if(value !== "" && value !== "Pathologist"){
+			setShowSite(true);
+		}
+		else{
+			setShowSite(false);
+		}
+		setRoleVal(value)
+	  };
 	  
 	 const handleSubmit = (data) => {
 		let params = {};
@@ -130,7 +144,7 @@ function Register() {
 						validationSchema={validationSchema}
 						onSubmit={handleSubmit}
 						>
-						{({ errors, touched, resetForm }) => (
+						{({ errors, touched, resetForm, props }) => (
 							<Form className="register100-form validate-form" id="signupForm">
 								<h4 className="register100-form-title font-weight-bold">Register a new account</h4>
 								<div className="form-row">
@@ -152,7 +166,7 @@ function Register() {
 								</div>
 								<div className="form-group">
 									<label htmlFor="role" className="mandatory">Role</label>
-									<Field as="select" name="role" type="role" className={ 'form-control' + (errors.role && touched.role ? ' is-invalid' : '') }>
+									<Field as="select" name="role" onChange={handleChange} value={roleVal} type="role" className={ 'form-control' + (errors.role && touched.role ? ' is-invalid' : '') }>
 										<option value="">-- Select option --</option>
 										<option value="Pathologist">Pathologist</option>
 										<option value="Doctor">Doctor</option>
@@ -160,7 +174,7 @@ function Register() {
 									</Field>
 									<ErrorMessage name="role" component="div" className="invalid-feedback" />																																							
 								</div>
-									
+								{showSite && (
 								<div className="form-group">
 									<label htmlFor="site" className="mandatory">Site</label>
 									<Field as="select" name="site" type="site" className={ 'form-control' + (errors.site && touched.site ? ' is-invalid' : '') }>
@@ -168,18 +182,16 @@ function Register() {
 									</Field>
 									<ErrorMessage name="site" component="div" className="invalid-feedback" />
 								</div>
-
-								<div className="form-row">
-									<div className="form-group col-6">
-										<label htmlFor="password" className="mandatory"> Password </label>
-										<Field name="password" type="password" className={ 'form-control' + (errors.password && touched.password ? ' is-invalid' : '') }/>
-										<ErrorMessage name="password" component="div" className="invalid-feedback" />
-									</div>
-									<div className="form-group col-6">
-										<label htmlFor="confirmpassword" className="mandatory"> Confirm Password </label>
-										<Field name="confirmpassword" type="password" className={ 'form-control' + (errors.confirmpassword && touched.confirmpassword ? ' is-invalid' : '') }/>
-										<ErrorMessage name="confirmpassword" component="div" className="invalid-feedback" />
-									</div>
+								)}
+								<div className="form-group">
+									<label htmlFor="password" className="mandatory"> Password </label>
+									<Field name="password" type="password" className={ 'form-control' + (errors.password && touched.password ? ' is-invalid' : '') }/>
+									<ErrorMessage name="password" component="div" className="invalid-feedback" />
+								</div>
+								<div className="form-group">
+									<label htmlFor="confirmpassword" className="mandatory"> Confirm Password </label>
+									<Field name="confirmpassword" type="password" className={ 'form-control' + (errors.confirmpassword && touched.confirmpassword ? ' is-invalid' : '') }/>
+									<ErrorMessage name="confirmpassword" component="div" className="invalid-feedback" />
 								</div>
 								<div className="form-group pt-2">
 									<div className="custom-checkbox custom-control">

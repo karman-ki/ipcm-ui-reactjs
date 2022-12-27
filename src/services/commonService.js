@@ -15,7 +15,18 @@ class CommonService {
 		const response = await axios.post(API_URL + 'sequence_list', params);
 		return response.data
 	}   
-
+	async curationList(params){
+		const response = await axios.post(API_URL + 'curation_list', params);
+		return response.data
+	} 
+	async updateCurationList(params){
+		const response = await axios.post(API_URL + 'update/curation', params);
+		return response.data 
+	}
+	async update_eCRFList(params){
+		const response = await axios.post(API_URL + 'eCRF_list', params);
+		return response.data 
+	}
 }
 
 export default new CommonService(); 

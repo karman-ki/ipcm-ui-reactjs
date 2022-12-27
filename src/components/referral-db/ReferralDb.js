@@ -57,7 +57,7 @@ function ReferralDb () {
 },[]);
 
 
-	const clickRefersh = () => {
+	const clickRefresh = () => {
 		referraldbList()
 	}
 
@@ -116,7 +116,7 @@ function ReferralDb () {
 					<h3>Referral DB from KI Biobank</h3>
 					<div className='top-buttons'>
 						<button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>
-						<button className='input-border action-buttons info-button' onClick={clickRefersh}><GrRefresh className="button-icon" />Refresh</button>
+						<button className='input-border action-buttons info-button' onClick={clickRefresh}><GrRefresh className="button-icon" />Refresh</button>
 					</div>
 					<div className="table-body-accessories">
 						<div className="mr-auto p-2">
@@ -186,7 +186,7 @@ function ReferralDb () {
 							})}
 						</tbody>
 						
-							{/* <tbody {...getTableBodyProps()}>
+							 {/*<tbody {...getTableBodyProps()}>
 								{page.map(row => {
 										prepareRow(row)
 										return (
@@ -194,8 +194,7 @@ function ReferralDb () {
 												<tr {...row.getRowProps()}>
 													{                              
 														row.cells.map(cell => {
-															return (
-																cell.value === '' ) ?
+															return (cell.value === '' || cell.value === 'undefined' || cell.value === undefined ) ?
 																<td>               
 																	<span
 																		{...row.getToggleRowExpandedProps({
@@ -232,6 +231,7 @@ function ReferralDb () {
 											)
 								})}
 							</tbody> */}
+							
 					
 						</table>
 					</div>
