@@ -93,6 +93,22 @@ table th {
     color: yellow;
 }
 
+.flex-container {
+	display: flex;
+	/* flex-wrap: wrap; */
+	justify-content: flex-start;
+}
+  
+.flex-container > div {
+	/* width: 20%; */
+	margin: 5px 0px;
+	padding-left: 50px;
+}
+
+.flex-container > div > span {
+	font-weight: 400;
+}
+
 .btn-info {
     color: #fff;
     background-color: #17a2b8;

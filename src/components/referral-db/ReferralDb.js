@@ -1,43 +1,48 @@
-import React, {useState, useEffect } from "react";
+import React, {useMemo,useEffect,useState} from "react";
 import { useTable, useFilters, useGlobalFilter, useSortBy, useExpanded, usePagination} from "react-table";
+
 import { GrRefresh } from "react-icons/gr";
 import { RiDatabase2Fill } from "react-icons/ri";
+
+
+import { useNavigate, Navigate } from "react-router-dom";
+
+import axios from "axios";
+
 import GlobalFilter from "../table-react/GlobalFilter";
 import ColumnFilter from "../table-react/ColumnFilter";
+
 import '../table-react/Table.css';
 import "react-widgets/styles.css";
+
 import commonService from "../../services/commonService";
 
-			
-
 function ReferralDb () {
+	const [refreshKey, setRefreshKey] = useState(0);
+	const navigate = useNavigate();
+	const [refData,setRefData]= useState([]);
+	const [headerColumn, setHeaderCol] = useState([]);
 
-	const [RefData, setRefData] = useState([]);
-	const [headerColumn, setHeaderCol] = useState([]);	
-	
-	const referraldbList = () => {
-		const siteId = sessionStorage.getItem('hp_st');
-		const params = { "s_id" : siteId};
-		commonService.referralList(params)
-			.then(function (response) {
-				var jsonData= response.data;
-				const dataset = [];
-				if (jsonData.length > 0){
-					jsonData.forEach(function (value) {
-						dataset.push(value);
-					}); 
-				}				
-				setRefData(dataset);
-		});
+	const siteId = sessionStorage.getItem('hp_st');
+	const params = { "s_id" : siteId};
 
-	}
+	commonService.referralList(params)
+	.then(function (response) {
+		const jsonData= response.data;
+		const dataset = [];
+		if (jsonData.length > 0){
+			jsonData.forEach(function (value) {
+				dataset.push(value);
+			}); 
+		}
+		setRefData(dataset);
+	});
+}
 
-	useEffect(() => {
+useEffect(() => {
+	referralList ()
 
-		referraldbList()
-		
-	
-	const column_arr = [
+	const COLUMNS = [
 		{
 			// Build our expander column
 			id: "expander", // Make sure it has an ID
@@ -53,16 +58,25 @@ function ReferralDb () {
 		{ Header: "DNA2", accessor: "dna2",Filter: ColumnFilter}
 	];
 
-	setHeaderCol(column_arr);					
-},[]);
+	setHeaderCol(columnList);
+	},[]);
 
+const clickRefresh = () => {
+	curationList()
+}
 
-	const clickRefresh = () => {
-		referraldbList()
-	}
-
-
-	//setting default sort values
+		
+	commonService.referralList(params)
+	.then(function (response) {
+		var resultSet= response.data.length;
+		if (resultSet >= 1){
+			for (let i = 0; i < resultSet; i++) 
+			dataset.push(response.data[i]);
+		}
+	});
+	
+	
+ 	//setting default sort values
 	const sortees = React.useMemo(
 		() => [
 			{ 
@@ -91,24 +105,22 @@ function ReferralDb () {
 		state,
 		setGlobalFilter
 	} = useTable({
-		columns : headerColumn,
-		data : RefData,
-		initialState:{ 
-			sortBy: sortees,
-			pageSize:10,
-			// hiddenColumns: ['expander'],
-		}
-		},
-		useFilters,
-		useGlobalFilter,
-		useSortBy,
-		useExpanded,
-		usePagination
-	)
+		columns : COLUMNS,
+		data : dataset,
+		initialState:
+		{sortBy: sortees}
+	},
+	useFilters,
+	useGlobalFilter,
+	useSortBy,
+	useExpanded,
+	usePagination)
 
 	const {globalFilter} = state ;
 	const {pageIndex,pageSize} = state ;
 
+	console.log("Data",data);
+	
 	return (
 		<>
 			<div className="container-fluid">
@@ -116,7 +128,7 @@ function ReferralDb () {
 					<h3>Referral DB from KI Biobank</h3>
 					<div className='top-buttons'>
 						<button className='input-border action-buttons edit-button'><RiDatabase2Fill className="button-icon" />Update ReferralDB</button>
-						<button className='input-border action-buttons info-button' onClick={clickRefresh}><GrRefresh className="button-icon" />Refresh</button>
+						<button className='input-border action-buttons info-button' onClick={() => setRefreshKey(oldKey => oldKey +1)}><GrRefresh className="button-icon" />Refresh</button>
 					</div>
 					<div className="table-body-accessories">
 						<div className="mr-auto p-2">
@@ -168,70 +180,55 @@ function ReferralDb () {
 									</tr>          
 								))}
 							</thead>
-											
+
 							<tbody {...getTableBodyProps()}>
 							{page.map(row => {
-								prepareRow(row)
-								return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map(cell => {
-									return (cell.column.Header === 'Status') 
-									? <td {...cell.getCellProps()}>{
-										<span className={cell.value.toString().toLowerCase()} style={{ fontWeight: 'bold' }}>{cell.render("Cell")}</span>
-									}</td>
-									: <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-									})}
-								</tr>
-								)
-							})}
-						</tbody>
-						
-							 {/*<tbody {...getTableBodyProps()}>
-								{page.map(row => {
-										prepareRow(row)
-										return (
-											<React.Fragment>
-												<tr {...row.getRowProps()}>
-													{                              
-														row.cells.map(cell => {
-															return (cell.value === '' || cell.value === 'undefined' || cell.value === undefined ) ?
-																<td>               
-																	<span
-																		{...row.getToggleRowExpandedProps({
-																			style: {
-																				paddingLeft: `${row.depth * 1}rem`
-																			}
-																		})}
-																	>
-																		{row.isExpanded ? "-" : "+"}
-																	</span>
-																</td>
-																:
-																<td {...cell.getCellProps()}>               
-																	{cell.render("Cell")}
-																</td>
-														})
-													
-													}
-												</tr>
-											{row.isExpanded ? (
-												<tr className="subTable">
-													<td>
-															{
-																<div className="subTableCols">
-																	<p><span className="subTableColstxt">DNA 3</span><span> {row.original.dna3}</span></p>
-																	<p><span className="subTableColstxt">Referral Type</span><span> {row.original.referral_name}</span></p>
-																	<p><span className="subTableColstxt">Hospital Name</span><span> {row.original.site_name}</span> </p>
-																</div>
-															}
-													</td>
-												</tr>
-											) : null}
-											</React.Fragment>
-											)
+									prepareRow(row)
+									return (
+										<React.Fragment>
+										<tr {...row.getRowProps()}>
+											{                              
+												row.cells.map(cell => {
+													return (cell.value === '' || cell.value === 'undefined' || cell.value === undefined )?
+														<td>               
+														<span
+															{...row.getToggleRowExpandedProps({
+																style: {
+																	// We can even use the row.depth property
+																	// and paddingLeft to indicate the depth
+																	// of the row
+																	paddingLeft: `${row.depth * 1}rem`
+																}
+															})}
+														>
+															{row.isExpanded ? "-" : "+"}
+														</span>
+														</td>
+														:
+														<td {...cell.getCellProps()}>               
+															{cell.render("Cell")}
+														</td>
+												})
+											
+											}
+										</tr>
+										{row.isExpanded ? (
+											<tr className="subTable">
+														{
+															/*renderRowSubComponent({ row })*/
+															<div className="subTableCols">
+															<p><span className="subTableColstxt">DNA 3</span><span> {row.original.dna3}</span></p> 
+															<p><span className="subTableColstxt">Referral Type</span><span> {row.original.referral_name}</span></p> 
+															<p><span className="subTableColstxt">Hospital Name</span><span> {row.original.site_name}</span> </p>
+															</div>
+															/*Referral Type "+row.original.referral_name + "\n\t Hospital Name "+row.original.site_name*/
+														}
+											</tr>
+										) : null}
+										</React.Fragment>
+										)
 								})}
-							</tbody> */}
-							
+							</tbody> 
 					
 						</table>
 					</div>
@@ -248,5 +245,5 @@ function ReferralDb () {
 			</div>
 		</>
 	)
-}
+							}
 export default ReferralDb;
