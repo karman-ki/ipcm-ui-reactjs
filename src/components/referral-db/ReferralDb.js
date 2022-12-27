@@ -8,7 +8,8 @@ import '../table-react/Table.css';
 import "react-widgets/styles.css";
 import commonService from "../../services/commonService";
 
-			
+import { AiOutlineMinus } from 'react-icons/ai';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 function ReferralDb () {
 
@@ -37,21 +38,33 @@ function ReferralDb () {
 		referraldbList()
 		
 	
-	const column_arr = [
-		{
-			// Build our expander column
-			id: "expander", // Make sure it has an ID
-			Header: "",
-			disableGlobalFilter: true
-		},
-		{ Header: "PNR", accessor: "pnr",Filter: ColumnFilter},
-		{ Header: "Date", accessor: "datum" ,Filter: ColumnFilter},
-		{ Header: "RID", accessor: "rid",Filter: ColumnFilter},
-		{ Header: "CDK", accessor: "cdk",Filter: ColumnFilter},
-		{ Header: "Blood", accessor: "blood" ,Filter: ColumnFilter},
-		{ Header: "DNA1", accessor: "dna1",Filter: ColumnFilter},
-		{ Header: "DNA2", accessor: "dna2",Filter: ColumnFilter}
-	];
+		const column_arr = [
+			{
+				Header: () => null,
+				id: "expander",
+				width: 30,
+				disableSortBy: true,
+				Cell: ({ row }) => (
+				  <span {...row.getToggleRowExpandedProps()}>
+					{row.isExpanded ? (
+					  <AiOutlineMinus />
+					) : (
+					  <AiOutlinePlus />
+					)}
+				  </span>
+				),
+				disableGlobalFilter: true
+			},
+			{ Header: "PNR", accessor: "pnr",Filter: ColumnFilter},
+			{ Header: "Date", accessor: "datum" ,Filter: ColumnFilter},
+			/*{ Header: "RID", accessor: "rid",Filter: ColumnFilter},*/
+			{ Header: "CDK", accessor: "cdk",Filter: ColumnFilter},
+			{ Header: "Blood", accessor: "blood" ,Filter: ColumnFilter},
+			{ Header: "DNA1", accessor: "dna1",Filter: ColumnFilter},
+			{ Header: "DNA2", accessor: "dna2",Filter: ColumnFilter},
+			{ Header: "DNA3", accessor: "dna3",Filter: ColumnFilter}
+	
+		];
 
 	setHeaderCol(column_arr);					
 },[]);
@@ -169,69 +182,64 @@ function ReferralDb () {
 								))}
 							</thead>
 											
-							<tbody {...getTableBodyProps()}>
-							{page.map(row => {
-								prepareRow(row)
-								return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map(cell => {
-									return (cell.column.Header === 'Status') 
-									? <td {...cell.getCellProps()}>{
-										<span className={cell.value.toString().toLowerCase()} style={{ fontWeight: 'bold' }}>{cell.render("Cell")}</span>
-									}</td>
-									: <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-									})}
-								</tr>
-								)
-							})}
-						</tbody>
-						
 							{/* <tbody {...getTableBodyProps()}>
 								{page.map(row => {
+									prepareRow(row)
+									return (
+									<tr {...row.getRowProps()}>
+										{row.cells.map(cell => {
+										return (cell.column.Header === 'Status') 
+										? <td {...cell.getCellProps()}>{
+											<span className={cell.value.toString().toLowerCase()} style={{ fontWeight: 'bold' }}>{cell.render("Cell")}</span>
+										}</td>
+										: <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+										})}
+									</tr>
+									)
+								})}
+							</tbody> */}
+						
+						<tbody {...getTableBodyProps()}>
+								{page.map((row,i) => {
 										prepareRow(row)
 										return (
-											<React.Fragment>
+											<React.Fragment key={i+"_ref"}>
 												<tr {...row.getRowProps()}>
-													{                              
-														row.cells.map(cell => {
-															return (
-																cell.value === '' ) ?
-																<td>               
-																	<span
-																		{...row.getToggleRowExpandedProps({
-																			style: {
-																				paddingLeft: `${row.depth * 1}rem`
-																			}
-																		})}
-																	>
-																		{row.isExpanded ? "-" : "+"}
-																	</span>
-																</td>
-																:
-																<td {...cell.getCellProps()}>               
-																	{cell.render("Cell")}
-																</td>
-														})
-													
-													}
+													{row.cells.map((cell) => {
+														return (
+														<td {...cell.getCellProps()}>
+															{cell.render("Cell")}
+														</td>
+														);
+													})}
 												</tr>
 											{row.isExpanded ? (
 												<tr className="subTable">
-													<td>
-															{
-																<div className="subTableCols">
-																	<p><span className="subTableColstxt">DNA 3</span><span> {row.original.dna3}</span></p>
-																	<p><span className="subTableColstxt">Referral Type</span><span> {row.original.referral_name}</span></p>
-																	<p><span className="subTableColstxt">Hospital Name</span><span> {row.original.site_name}</span> </p>
+													<td colSpan={8}>
+															{	
+																<div className="flex-container">
+																	<div>
+																		<b>RID : </b>
+																		<span> {row.original.rid}</span>
+																	</div>
+                               										<div>
+																		<b>Referral Type : </b>
+																		<span> {row.original.referral_name}</span>
+																	</div>
+                            										<div>
+																		<b>Hospital Name : </b>
+																		<span> {row.original.site_name}</span>
+																	</div>
+
 																</div>
 															}
 													</td>
 												</tr>
 											) : null}
 											</React.Fragment>
-											)
+										)
 								})}
-							</tbody> */}
+							</tbody>
 					
 						</table>
 					</div>
