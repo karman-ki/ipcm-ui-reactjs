@@ -3,7 +3,7 @@ import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination} from "
 import { GrRefresh } from "react-icons/gr";
 import ColumnFilter from "../table-react/ColumnFilter";
 import GlobalFilter from "../table-react/GlobalFilter";
-import UploadPdf from "../curation/UploadPdf";
+//import UploadPdf from "../curation/UploadPdf";
 
 import "react-widgets/styles.css";
 import 'react-toastify/dist/ReactToastify.css';
@@ -137,17 +137,16 @@ function Curation() {
 		});
     }
 
-    const uploadPdf = (curation_id,study_id) => {
-        //console.log('Upload PDF')
+    /*const uploadPdf = (curation_id,study_id) => {
         return UploadPdf(curation_id, study_id)
-    }
+    }*/
 
     const submitAction = (cur_status,id,study_id) => {
         if(cur_status === '0'){
 		    updateCurationList(id)
         }
         if(cur_status === '1'){
-		    uploadPdf(id,study_id)
+		    //uploadPdf(id,study_id)
         }
 	}
 
