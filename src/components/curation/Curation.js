@@ -3,7 +3,8 @@ import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination} from "
 import { GrRefresh } from "react-icons/gr";
 import ColumnFilter from "../table-react/ColumnFilter";
 import GlobalFilter from "../table-react/GlobalFilter";
-//import UploadPdf from "../curation/UploadPdf";
+import UploadPdf from "../curation/UploadPdf";
+
 
 import "react-widgets/styles.css";
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,6 +18,8 @@ function Curation() {
 
     const [curData, setCurData] = useState([]);
 	const [headerColumn, setHeaderCol] = useState([]);
+    const [show, setShow] = useState(false); 
+    
 
 	
 		const curationList = () => {
@@ -48,8 +51,7 @@ function Curation() {
             { Header: "Study ID", accessor: "study_id", Filter: ColumnFilter },
             { Header: "Site name", accessor: "site_name", Filter: ColumnFilter},
             { Header: "Created on", accessor: "created_on", Filter: ColumnFilter},
-            { Header: "Action", accessor: "status_name",Filter: ColumnFilter}//action => row.original.status_name.toString()
-            
+            { Header: "Action", accessor: "status_name",Filter: ColumnFilter, disableSortBy: true}
         ];
 
     setHeaderCol(columnList);
@@ -100,8 +102,7 @@ function Curation() {
 
 	const {globalFilter} = state
 	const {pageIndex,pageSize} = state
-    console.log("State info",state)
-
+    
     const populateAction = (cur_status, status_name,id,sd_id) => {
         const roleId=sessionStorage.getItem('rl_st');
         let action_str = '';
@@ -116,7 +117,7 @@ function Curation() {
             enable_event = (cur_status === '0' ? 'submitCuration' : ''); 
             action_str = <button type="button" title={status_name} id={id} className={"btn btn-sm "+(action_class)+" "+(enable_event)+"font-weight-bold mr-1"} style={{ width: 'max-content' }}>{action_txt}</button>;
             if(cur_status === '1'){
-                action_str = <div className="align-button"><button type="button" title={status_name} id={id} className={"btn btn-sm "+(action_class)+" "+(enable_event)+" font-weight-bold mr-1"} style={{ width: 'max-content' }}>{action_txt}</button><button type="button" title="Upload Pdf" id={id} data-id={sd_id} className="btn btn-sm btn-secondary pdf-upload font-weight-bold" style={{ width: 'max-content' }}>Upload PDF</button></div>;
+                action_str = <div className="align-button"><button type="button" title={status_name} id={id} className={"btn btn-sm "+(action_class)+" "+(enable_event)+" font-weight-bold mr-1"} style={{ width: 'max-content' }}>{action_txt}</button><UploadPdf curation_id={id} study_id={sd_id}/></div>;
             }
         }else{
             action_str = <a href="" className={"btn btn-sm "+action_class+" disabled mr-1"}>{action_txt}</a>;
@@ -135,22 +136,14 @@ function Curation() {
                 curationList()	 
 			}
 		});
-    }
-
-    /*const uploadPdf = (curation_id,study_id) => {
-        return UploadPdf(curation_id, study_id)
-    }*/
+    }   
 
     const submitAction = (cur_status,id,study_id) => {
         if(cur_status === '0'){
 		    updateCurationList(id)
         }
-        if(cur_status === '1'){
-		    //uploadPdf(id,study_id)
-        }
-	}
-
-
+    }
+    
     return (
         <>
             <div className="container-fluid">
@@ -185,9 +178,9 @@ function Curation() {
                             <thead>
                                 {headerGroups.map(headerGroup => (
                                     <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map(column => (
-                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render("Header")}
+                                    {headerGroup.headers.map(column => (                                                                                                                                                
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>                                            
+                                            {column.render("Header")}
                                             <span>
                                             {column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↑↓'}
                                             </span>
@@ -217,7 +210,6 @@ function Curation() {
                                     return (
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map(cell => {
-                                            console.log(cell)
                                         return (cell.column.Header === 'Capture ID' || cell.column.Header === 'RID') 
                                         ? <td {...cell.getCellProps()}>{cell.value.split(',').join()}</td>
                                         :(cell.column.Header === 'Action') ? 
@@ -247,5 +239,5 @@ function Curation() {
         </>
       )
     }
-    
+
     export default Curation;

@@ -23,6 +23,11 @@ class CommonService {
 		const response = await axios.post(API_URL + 'update/curation', params);
 		return response.data 
 	}
+	async uploadPdfReport(params){
+		const response = await axios.post(API_URL + 'upload_pdf', params);
+		return response.data 
+	}
+
 	async update_eCRFList(params){
 		const response = await axios.post(API_URL + 'eCRF_list', params);
 		return response.data 
