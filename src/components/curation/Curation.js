@@ -17,12 +17,9 @@ function Curation() {
   
 
     const [curData, setCurData] = useState([]);
-	const [headerColumn, setHeaderCol] = useState([]);
-    const [show, setShow] = useState(false); 
-    
-
+	const [headerColumn, setHeaderCol] = useState([]);    
 	
-		const curationList = () => {
+	const curationList = () => {
 		const siteId = sessionStorage.getItem('hp_st');
 		const uId = sessionStorage.getItem('u_id');        
 		const params = { "s_id" : siteId, "u_id" :uId};
@@ -54,7 +51,7 @@ function Curation() {
             { Header: "Action", accessor: "status_name",Filter: ColumnFilter, disableSortBy: true}
         ];
 
-    setHeaderCol(columnList);
+        setHeaderCol(columnList);
 	},[]);
 
 	const clickRefresh = () => {
@@ -111,7 +108,7 @@ function Curation() {
         const icon_class = (cur_status === '0' ? 'fas fa-paper-plane' : (cur_status === '1' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'));
         const action_class = (cur_status === '0' ? 'btn-info' : (cur_status === '1' ? 'btn-success disabled' : 'btn-danger disabled'));
 
-        const action_txt = <><i class={(icon_class)} /> {status_name}</>;
+        const action_txt = <><i className={(icon_class)} /> {status_name}</>;
         
         if(roleId === '0') {
             enable_event = (cur_status === '0' ? 'submitCuration' : ''); 
@@ -120,7 +117,7 @@ function Curation() {
                 action_str = <div className="align-button"><button type="button" title={status_name} id={id} className={"btn btn-sm "+(action_class)+" "+(enable_event)+" font-weight-bold mr-1"} style={{ width: 'max-content' }}>{action_txt}</button><UploadPdf curation_id={id} study_id={sd_id}/></div>;
             }
         }else{
-            action_str = <a href="" className={"btn btn-sm "+action_class+" disabled mr-1"}>{action_txt}</a>;
+            action_str = <button className={"btn btn-sm "+action_class+" mr-1"}>{action_txt}</button>;
         }
 
         return action_str;
@@ -155,7 +152,7 @@ function Curation() {
                     <div className="table-body-accessories">
                         <div className="mr-auto p-2">
                             <div className="form-inline">
-                                <label>Show 
+                                <label htmlFor="">Show 
                                     <select className='input input-border select entries-picker' 
                                         value={pageSize}
                                         onChange={(e) => setPageSize(Number(e.target.value))} >
