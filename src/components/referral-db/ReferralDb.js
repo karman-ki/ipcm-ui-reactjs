@@ -161,7 +161,7 @@ function ReferralDb () {
 											<th {...column.getHeaderProps(column.getSortByToggleProps())}>
 												{column.render("Header")}
 													<span>
-														{column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↑↓'}
+													{column.canSort ? (column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↑↓') :''}
 													</span>
 											</th>
 										))}
