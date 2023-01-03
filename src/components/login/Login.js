@@ -83,11 +83,11 @@ function Login() {
 		<>
 			<div className="container-login100">
 				<div className="row wrap-login100">
-					<div className="col-7">
+					<div className="col-6">
 						<img className="login-logo" src={BrandLogo} alt="iPCM logo" />
 						<h2 className="login-app-title"> iPCM leaderboard</h2>
 					</div>
-					<div className="col-5">
+					<div className="col-6">
 						<Formik
 							initialValues={initialValues}
 							validationSchema={validationSchema}
@@ -115,7 +115,7 @@ function Login() {
 											Login
 										</button>
 									</div>
-									<div className="form-group">
+									<div className="form-group pt-1">
 										Don't have an account? <a href="/register">Register</a>
 									</div>
 								</Form>
