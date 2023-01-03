@@ -80,3 +80,14 @@
     content: ' *';
     display:inline;
 }
+
+.form-control {
+	border-radius: 4px;
+	min-height: 40px;
+}
+
+input,
+input::placeholder,select,
+select::placeholder  {
+	font-size: 14px;
+}

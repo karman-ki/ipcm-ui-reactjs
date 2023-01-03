@@ -136,3 +136,14 @@ table th {
   .align-button {
     display: flex;
 }
+.displayblock{
+	display: flex;
+	flex-wrap: nowrap;
+	padding: 20px,40px,30px,20px;  	
+	width: 500px;
+	margin: 10px;
+	text-indent: 2.5em;
+	text-align: left;
+	line-height: 1.8;
+	font-size: 15px;
+	}
