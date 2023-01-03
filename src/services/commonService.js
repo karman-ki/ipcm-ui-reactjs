@@ -53,6 +53,10 @@ class CommonService {
 		const response = await axios.post(API_URL + 'eCRF_approve', params);
 		return response.data 
 	}
+	async inclusionList(params){
+		const response = await axios.post(API_URL + 'process_sample_list', params);
+		return response.data 
+	}
 }
 
 export default new CommonService(); 

@@ -147,3 +147,86 @@ table th {
 	line-height: 1.8;
 	font-size: 15px;
 	}
+
+	/* Inclusion page CSS from old code */
+
+	.bs-wizard {margin-top: 0px;}
+
+	.progress {
+		background-color: #c9ced4;
+	}
+	
+	 .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
+	.bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
+	.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {font-weight:900!important; font-size: 10px; margin-bottom: 5px; text-transform: uppercase;}
+	.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+	.bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;} 
+	.bs-wizard > .bs-wizard-step > .bs-wizard-dot.success {background: #3cb371;}
+	.bs-wizard > .bs-wizard-step > .bs-wizard-dot.failed {background: #E7625F;}
+	.bs-wizard > .bs-wizard-step > .bs-wizard-dot.pending {background:#FFD700;} 
+	
+	
+	.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #ECF87F; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
+	.bs-wizard > .bs-wizard-step > .bs-wizard-dot.pending:after {content: ' '; width: 14px; height: 14px; background: #3cb371; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
+	
+	.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 6px; box-shadow: none; margin: 25px 0;}
+	.bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none;}
+	
+	.bs-wizard > .bs-wizard-step > .progress > .progress-bar.success {background: #3cb371;}
+	.bs-wizard > .bs-wizard-step > .progress > .progress-bar.failed {background: #E7625F;} 
+	.bs-wizard > .bs-wizard-step > .progress > .progress-bar.pending {background: #FFD700 ;} 
+	
+	.bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
+	.bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
+	.bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
+	.bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
+	.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #c9ced4;}
+	.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
+	.bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
+	.bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
+	.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
+	
+	
+	.inclusion{
+		color:orangered;
+	}
+	
+	.biobank, .ongoing {
+		color: #007bff;
+	}
+	.sequencing {
+		color: #d81b60;
+	}
+	
+	.data-delivered {
+		color: #3c8dbc;
+	}
+	
+	.analysis {
+		color: #6610f2;
+	}
+	
+	
+	.curation {
+		color: #28a745;
+	}
+	
+	.report {
+		color: #ea1212;
+	}
+	
+	.pending {
+		color: yellow;
+	}
+	.randomization, .completed {
+		color:#787D12;
+	}
+	
+	.discontinue, .excluded, .cancelled, .no-data{
+		color:red;
+	}
+	
+	.unschedule {
+		color:lightblue;
+	}
+	
