@@ -109,30 +109,6 @@ h5 {
 	padding-bottom: 50px;
 }
 
-/** Login **/
-
-.login-container {
-	background-color: white;
-	padding: 30px;
-	width: 90%;
-	max-width: 1000px;
-	margin: auto;
-}
-
-.login-form {
-	width: 50%;
-	margin: auto;
-}
-
-.login-button {
-	height: 50px;
-}
-
-.login-logo {
-	width: 50%;
-}
-
-
 /*** Header ***/
 
 #header {
