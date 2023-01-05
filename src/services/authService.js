@@ -21,7 +21,6 @@ class AuthService {
         return response.data;
     }
     
-
 }
 
 export default new AuthService(); 

@@ -57,6 +57,25 @@ class CommonService {
 		const response = await axios.post(API_URL + 'process_sample_list', params);
 		return response.data 
 	}
+	async basicStats(params){
+		const response = await axios.post(API_URL + 'overall_process_count', params);
+		return response.data 
+	}
+	async processSampleDateWise(params){
+		const response = await axios.post(API_URL + 'proces_sample_date_wise', params);
+		return response.data 
+	}
+	async hospitalWiseSampleCount(params){
+		const response = await axios.post(API_URL + 'hospital_wise_count', params);
+		return response.data 
+	}
+	async weeklySampleInfo(params){
+		const response = await axios.post(API_URL + 'process_sample_week_list', params);
+		return response.data 
+	}
+
+
+
 }
 
 export default new CommonService(); 
