@@ -30,7 +30,7 @@ const App = () => {
 				<Route path="register" element={<Register />} />
 
 				<Route exact path="/" element={<AppComponent />}>
-					<Route index element={<Dashboard />} />
+					<Route path="dashboard" element={<Dashboard />} />
 					<Route path="create" element={<Create />} />
 					<Route path="inclusion" element={<Inclusion />} />
 					<Route path="Curation" element={<Curation />} />

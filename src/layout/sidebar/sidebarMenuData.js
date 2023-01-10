@@ -12,7 +12,7 @@ const sidebarMenuData = [
     {
         "title": "Dashboard",
         "icon": <GoDashboard className="nav-img"/>,
-        "path": "/",
+        "path": "/dashboard",
         "parent": true
     },
     {

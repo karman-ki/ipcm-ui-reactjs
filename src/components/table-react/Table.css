@@ -230,3 +230,117 @@ table th {
 		color:lightblue;
 	}
 	
+	.info-box {
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+		border-radius: 0.25rem;
+		background-color: #fff;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		margin-bottom: 1rem;
+		min-height: 80px;
+		padding: .5rem;
+		position: relative;
+		width: 100%;
+	  }
+	  .shadow-lg {
+		box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+	  }
+	  .info-box .info-box-icon {
+		border-radius: 0.25rem;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		font-size: 1.875rem;
+		-webkit-justify-content: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		text-align: center;
+		width: 70px;
+	  }
+	  
+	  .info-box .info-box-text {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	  }
+
+	  .info-box .info-box-number {
+		display: block;
+		margin-top: .25rem;
+		font-weight: 700;
+	  }
+	  
+	  .bg-olive {
+		background-color: #3d9970 !important;
+	  }
+	  
+	  .bg-olive,
+	  .bg-olive > a {
+		color: #fff !important;
+	  }
+
+		.bg-warning {
+			background-color: #ffc107 !important;
+		  }
+		  
+		  .bg-warning,
+		  .bg-warning > a {
+			color: #1f2d3d !important;
+		  }
+
+		  .bg-info {
+			background-color: #17a2b8 !important;
+		  }
+		  
+		  .bg-info,
+		  .bg-info > a {
+			color: #fff !important;
+		  }
+
+		  .bg-light-green {
+			background-color: #F6A21E;
+			color: #ffffff;
+		}
+
+		.bg-lightblue {
+			background-color: #3c8dbc !important;
+		  }
+		  
+		  .bg-lightblue,
+		  .bg-lightblue > a {
+			color: #fff !important;
+		  }
+
+		  .bg-green {
+			background-color: #28a745 !important;
+		  }
+		  
+		  .bg-green,
+		  .bg-green > a {
+			color: #fff !important;
+		  }
+
+		  .bg-danger {
+			background-color: #dc3545 !important;
+		  }
+		  
+		  .bg-danger,
+		  .bg-danger > a {
+			color: #fff !important;
+		  }
+
+		  .bg-primary {
+			background-color: #007bff !important;
+		  }
+		  
+		  .bg-primary,
+		  .bg-primary > a {
+			color: #fff !important;
+		  }
+		  
+		  
