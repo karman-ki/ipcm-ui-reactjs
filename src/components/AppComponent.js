@@ -18,7 +18,7 @@ const AppComponent = () => {
   return (
 	<>
 	  <div id='page-container'>
-		<div id='wrapper'>
+		{/* <div id='wrapper'> */}
 			<Header />
 			<div id='content-wrapper'>
 			  <Sidebar />
@@ -27,7 +27,7 @@ const AppComponent = () => {
 			  </div>
 			</div>
 			<Footer />
-		</div>
+		{/* </div> */}
 	  </div>
 	</>
   );

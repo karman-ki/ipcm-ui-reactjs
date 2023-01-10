@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiLogIn } from "react-icons/fi";
 
-import BrandLogo from '../../assets/images/logo/logo.png';
+import BrandLogo from '../../assets/images/logo/logo-text01.png';
 
 function Header() {
 
@@ -25,15 +25,15 @@ function Header() {
             }
             nav.style.width = "var(--navbar-min-width)";
             nav.style.backgroundColor = "var(--navbar-background-color)"
-            // con.style.marginLeft = "var(--navbar-min-width)";
+            con.style.marginLeft = "var(--navbar-min-width)";
             con.style.width = "calc(100% - var(--navbar-min-width))"
         } else {
             for(var j = 0;j<texts.length;j++){
-                texts[j].style.display = "inline-block";
+                texts[j].style.display = "inline";
             }
             nav.style.width = "var(--navbar-max-width)";
             nav.style.backgroundColor = "transparent"
-            // con.style.marginLeft = "var(--navbar-max-width)";
+            con.style.marginLeft = "var(--navbar-max-width)";
             con.style.width = "calc(100% - var(--navbar-max-width))"
         }
     }
@@ -51,8 +51,8 @@ function Header() {
             <div id="header">
                 <div className="header-left">
                     <div className="nav-brand">
-                        <img className="brand-logo" src={BrandLogo} alt="iPCM logo"></img>
-                        <h1 className="main-title" >iPCM Leaderboard</h1>
+                        <img className="brand-logo" src={BrandLogo} alt="iPCM logo" />
+                        <h1 className="main-title">Leaderboard</h1>
                     </div>
                     <div id="nav-top">
                         <GiHamburgerMenu onClick={ToggleSidebar} />

@@ -90,10 +90,9 @@ import commonService from "../../services/commonService";
 					statsElement.push(value);
 				}); 
 			}
-			console.log("statsData[0]",statsElement[0])		
-			console.log("statsData[1]",statsElement[1])
 
-			stats_html.push(<div className={"col-12 col-sm-6 col-md-3"}>
+			stats_html.push(
+				<div className={"col-12 col-sm-6 col-md-3"}>
 					<div className={"info-box shadow-lg"}>
 						<span className={"info-box-icon "+(icon_col[i])}>
 							<i className={(icon_arr[i])}></i>
@@ -103,8 +102,9 @@ import commonService from "../../services/commonService";
 							<span className={"info-box-number"}>{statsElement[1]}</span>
 						</div>
 					</div>
-				</div>)
-			}
+				</div>
+			)
+		}
 		return stats_html;
 	}
 
@@ -239,94 +239,88 @@ import commonService from "../../services/commonService";
   return (
 	<>
 		{/*Content Wrapper. Contains page content */}
-		<div className="content-wrapper">
-		<div className="content-header">
-			<div className="container-fluid">
-				<div className="row mb-2">
-					<div className="col-sm-6">
-						<h1 className="m-0 text-dark">Dashboard</h1>
+
+		<div className="container-fluid">
+			<div className='section-step'>
+				<h3>Dashboard</h3>
+				<div className="row">
+					{populateBasicStats()}
+				</div>
+				<div className="row">
+					<div className="col-4">
+						<div className="card">
+							<div className="card-header">
+								<h4 className="card-title">Hospital-wise Sample count</h4>
+							</div>
+							<div className="card-body">
+								<div className="chart">
+									<canvas id="hospitalwiseStats" className="site-wise-chart"></canvas>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div className="col-sm-6">
-						<ol className="breadcrumb float-sm-right">
-							<li className="breadcrumb-item active">Dashboard</li>
-						</ol>
+					<div className="col-8">
+						<div className="card">
+							<div className="card-header">
+								<h4 className="card-title">Date-wise Inclusion Count</h4>
+							</div>
+							<div className="card-body">
+								<div className="chart">
+									<canvas id="siteWiseCount" className="site-wise-chart"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="row pt-5">
+					<div className="col-12">
+						<div className="card">
+							<div className="card-header">
+								<h4 className="card-title">Latest Inclusion Details</h4>
+							</div>
+							<div className="card-body">
+								<div>
+									<table {...getTableProps()}>
+										<thead>
+											{headerGroups.map(headerGroup => (
+												<tr {...headerGroup.getHeaderGroupProps()}>
+												{headerGroup.headers.map(column => (
+													<th {...column.getHeaderProps(column.getSortByToggleProps())}>
+													{column.render("Header")}
+															<span>
+															{column.canSort ? (column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↑↓') :''}
+															</span>
+													</th>
+												))}
+												</tr>          
+											))}
+
+										</thead>
+
+										<tbody {...getTableBodyProps()}>
+											{page.map(row => {
+												prepareRow(row)
+												return (
+												<tr {...row.getRowProps()}>
+													{row.cells.map(cell => {
+													return (cell.column.Header === 'Processing Status') 
+													? <td {...cell.getCellProps()}>
+														{populateProgressBar(cell.row.original.inclusion,cell.row.original.pathology,cell.row.original.biobank, cell.row.original.sequencing,cell.row.original.data_delivered,cell.row.original.analysis,cell.row.original.curation,cell.row.original.report)}
+													</td>
+													: <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+													})}
+												</tr>
+												)
+											})}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		</div>
-		<div class="row">
-			{populateBasicStats()}
-		</div>
-		<div class="row">
-		<div className="container-fluid">
-			<div className='section-step'>
-				<h3>Latest Inclusion Details</h3>
-				<div className="table-body-accessories">
-					<div className="mr-auto p-2">
-						<div className="form-inline">
-							<label>Show 
-								<select className='input input-border select entries-picker' 
-									value={pageSize}
-									onChange={(e) => setPageSize(Number(e.target.value))} >
-									{[10,25,50,100].map((pageSize) => (
-										<option key={pageSize} value={pageSize}>
-										{pageSize}
-										</option>
-									))}
-								</select>
-								entries
-							</label>
-						</div>
-					</div>
-					</div>
-				<div>
-					<table {...getTableProps()}>
-						<thead>
-							{headerGroups.map(headerGroup => (
-								<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map(column => (
-									<th {...column.getHeaderProps(column.getSortByToggleProps())}>
-									{column.render("Header")}
-                                            <span>
-                                            {column.canSort ? (column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↑↓') :''}
-                                            </span>
-									</th>
-								))}
-								</tr>          
-							))}
-
-						</thead>
-
-						<tbody {...getTableBodyProps()}>
-							{page.map(row => {
-								prepareRow(row)
-								return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map(cell => {
-									return (cell.column.Header === 'Processing Status') 
-									? <td {...cell.getCellProps()}>
-                                        {populateProgressBar(cell.row.original.inclusion,cell.row.original.pathology,cell.row.original.biobank, cell.row.original.sequencing,cell.row.original.data_delivered,cell.row.original.analysis,cell.row.original.curation,cell.row.original.report)}
-									</td>
-									: <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-									})}
-								</tr>
-								)
-							})}
-						</tbody>
-					</table>
-				</div>
-				<div className="text-center">
-					<button  onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-					<span> 
-						<strong> {pageIndex + 1} </strong>
-					</span>
-					<button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
-				</div>
-			</div> 
-		</div>
-		</div>
-		
+		</div>	
 	</>
   )
 
