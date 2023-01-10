@@ -317,7 +317,7 @@ import commonService from "../../services/commonService";
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>	
 				</div>
 			</div>
 		</div>	
